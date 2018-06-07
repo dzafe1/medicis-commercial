@@ -1,0 +1,236 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
+<head xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title> Medical | Hospitals</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link href="//fonts.googleapis.com/css?family=Roboto%7CRoboto+Condensed:300,400%7CGentium+Basic:400italic&amp;subset=latin,latin,latin"
+          rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" th:href="@{css/extras.min.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{css/theme.min.css}">
+    <link rel="stylesheet" th:href="@{css/medical.min.css}">
+    <link rel="stylesheet" th:href="@{/css/easy-autocomplete.min.css}">
+    <link rel="stylesheet" th:href="@{/css/easy-autocomplete.themes.min.css}">
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{images/favicons/apple-touch-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{images/favicons/apple-touch-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{images/favicons/apple-touch-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{images/favicons/apple-touch-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{images/favicons/apple-touch-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{images/favicons/apple-touch-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{images/favicons/apple-touch-icon-144x144.png}">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-96x96.png}" sizes="96x96">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-16x16.png}" sizes="16x16">
+    <link rel="shortcut icon" th:href="@{images/favicons/favicon.ico}">
+</head>
+<body class="pace-on pace-counter">
+<div th:replace="layouts/header"></div>
+<div id="content" role="main">
+    <article>
+        <section class="section">
+            <div class="background-media"
+                 style="background-image: url(images/medical/img7-notinclude.jpg); background-repeat:no-repeat; background-size:cover; background-attachment:fixed; background-position: 50% 0%;"></div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(44,137,159,0.2);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <h1 class="text-center element-top-100 element-bottom-100 text-light normal regular">Find the
+                            best hospitals in the world on Medicis
+                        </h1>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section" style="overflow: visible; z-index: 1000">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="list-container row element-top-50 element-bottom-50 os-animation"
+                             data-os-animation="fadeIn" data-os-animation-delay="0.1s">
+                            <form class="form-inline" id="hospitalSearchForm" action="">
+                                <div class="form-group col-xs-4">
+                                    <input type="text" placeholder="Type in diagnosis" id="diagnosis" class="form-control">
+                                </div>
+                                <div class="form-group col-xs-3">
+                                    <select>
+                                        <option value="Albania">Albania</option>
+                                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                                        <option value="Croatia">Croatia</option>
+                                        <option value="Serbia">Serbia</option>
+                                        <option value="Kosovo">Kosovo</option>
+                                        <option value="Montenegro">Montenegro</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-xs-3">
+                                    <input type="text" id="hospitalCity" onfocus="initAutocomplete()" placeholder="City" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="background-media"
+                 style="background-size:cover; background: #f2f2f2 no-repeat fixed 50% 0%;"></div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(255,255,255,0);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center small-screen-center">
+                        <div class="divider-wrapper">
+                            <div class="visible-xs element-height-80"></div>
+                            <div class="visible-sm element-height-80"></div>
+                            <div class="visible-md element-height-80"></div>
+                            <div class="visible-lg element-height-80"></div>
+                        </div>
+                        <th:block th:each="hospital : ${hospitals}">
+                        <div class="card clinic-card clinic-s">
+                            <div class="content" style="padding-bottom: 0px;">
+                                <div class="tab-content  ">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <!-- Carousel Card -->
+                                            <a th:href="@{/hospital/} + ${hospital.id}">
+                                                <div class="clinic-carusel"
+                                                     style="background: url('https://bookinghealth.info/uploads/clinics/5a9ffd3e846c2.jpg') scroll left center / cover;">
+                                                    <img itemprop="photo" alt="clinic image"
+                                                         src="https://bookinghealth.info/uploads/clinics/5a9ffd3e846c2.jpg">
+                                                </div>
+                                                <div class="cer-top-div">
+                                                    <img alt="certificate"
+                                                                              src="https://bookinghealth.info/uploads/certificates/m_focus.png"
+                                                                              class="certificate_m">
+                                                </div>
+                                            </a>
+                                            <!-- End Carousel Card -->
+                                        </div>
+                                        <div class="col-md-7" style="border-left: 1px solid #eeeeee">
+                                            <h3 itemprop="name" th:text="${hospital.fullName}"></h3>
+                                            <span class="sprite rating">
+                                       <span style="width:100%" class="sprite rating-i"></span>
+                                       </span>
+                                            <p itemprop="description" th:text="${hospital.aboutHospital}"></p>
+                                            <hr>
+                                            <div class="row clinic_loc">
+                                                <div class="col-md-6">
+                                                    <div class="cl_info text-muted">
+                                                         Amount of beds available:<span th:text="${hospital.amountOfBeds}"> </span><br>
+                                                         Patients yearly: <span th:text="${hospital.yearlyPatients}"> </span><br>
+                                                    </div>
+                                                    <div class="clinic_loc_1"><i
+                                                            class="material-icons">location_on</i><b>Country:</b>
+                                                        <span th:text="${hospital.country}"></span>
+                                                    </div>
+                                                    <div class="clinic_loc_1"><i class="material-icons">location_searching</i><b>City:</b>
+                                                        <span th:text="${hospital.city}"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 text-center">
+                                                    <br>
+                                                    <br>
+                                                    <a th:href="@{/hospital/} + ${hospital.id}"
+                                                       class="btn btn-warning btn-raised btn-lg  btn-success"> See
+                                                        more</span> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </th:block>
+                        <div class="divider-wrapper">
+                            <div class="visible-xs element-height-80"></div>
+                            <div class="visible-sm element-height-80"></div>
+                            <div class="visible-md element-height-80"></div>
+                            <div class="visible-lg element-height-80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+    <div th:replace="layouts/footer"></div>
+</div>
+
+<script th:src="@{js/theme.min.js}"></script>
+<script th:src="@{js/revolution.min.js}"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('.tp-banner').show().revolution(
+            {
+                delay: 9000,
+                startwidth: 1170,
+                startheight: 500,
+                onHoverStop: "on", // Stop Banner Timer at Hover on Slide on/off
+                thumbWidth: 100, // Thumb With and Height and Amount (only if navigation Tyope set to thumb !)
+                thumbHeight: 50,
+                thumbAmount: 2,
+                hideThumbs: 200,
+                navigationType: "none", // bullet, thumb, none
+                navigationArrows: "solo", // nexttobullets, solo (old name verticalcentered), none
+                navigationStyle: "round", // round,square,navbar,round-old,square-old,navbar-old, or any from the list in the docu (choose between 50+ different item), custom
+                navigationHAlign: "center", // Vertical Align top,center,bottom
+                navigationVAlign: "bottom", // Horizontal Align left,center,right
+                navigationHOffset: 0,
+                navigationVOffset: 20,
+                soloArrowLeftHalign: "left",
+                soloArrowLeftValign: "center",
+                soloArrowLeftHOffset: 20,
+                soloArrowLeftVOffset: 0,
+                soloArrowRightHalign: "right",
+                soloArrowRightValign: "center",
+                soloArrowRightHOffset: 20,
+                soloArrowRightVOffset: 0,
+                touchenabled: "on", // Enable Swipe Function : on/off
+                stopAtSlide: -1, // Stop Timer if Slide "x" has been Reached. If stopAfterLoops set to 0, then it stops already in the first Loop at slide X which defined. -1 means do not stop at any slide. stopAfterLoops has no sinn in this case.
+                stopAfterLoops: -1, // Stop Timer if All slides has been played "x" times. IT will stop at THe slide which is defined via stopAtSlide:x, if set to -1 slide never stop automatic
+                hideCaptionAtLimit: 0, // It Defines if a caption should be shown under a Screen Resolution ( Basod on The Width of Browser)
+                hideAllCaptionAtLilmit: 0, // Hide all The Captions if Width of Browser is less then this value
+                hideSliderAtLimit: 0, // Hide the whole slider, and stop also functions if Width of Browser is less than this value
+                fullWidth: "on",
+                fullScreen: "off",
+                parallax: "mouse+scroll",
+                parallaxBgFreeze: "off",
+                parallaxLevels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+                shadow: 0
+            });
+    });
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg73nbHsG2WWRld_QoXUmTOcR-oIlrZKA&libraries=places&region=BA&language=en"></script>
+<script>
+    function initAutocomplete() {
+        autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('hospitalCity'), {types: ['geocode']});
+        autocomplete1.addListener('place_changed', function () {
+            var place = autocomplete1.getPlace();
+            if (!place.geometry) {
+                window.alert("We could not find place!");
+                return;
+            }
+        });
+    }
+</script>
+<script th:src="@{/js/jquery.easy-autocomplete.min.js}"></script>
+<script>
+    var options = {
+        url: "http://localhost:8080/diagnosis",
+        getValue: "diagnosis",
+        list: {
+            match: {
+                enabled: true
+            }
+        }
+    };
+    $("#diagnosis").easyAutocomplete(options);
+</script>
+</body>
+</html>

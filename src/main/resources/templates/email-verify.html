@@ -1,0 +1,148 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title> Verify email | Medical</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link href="//fonts.googleapis.com/css?family=Roboto%7CRoboto+Condensed:300,400%7CGentium+Basic:400italic&amp;subset=latin,latin,latin" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" th:href="@{css/extras.min.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{css/theme.min.css}">
+    <link rel="stylesheet" th:href="@{css/medical.min.css}">
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{images/favicons/apple-touch-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{images/favicons/apple-touch-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{images/favicons/apple-touch-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{images/favicons/apple-touch-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{images/favicons/apple-touch-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{images/favicons/apple-touch-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{images/favicons/apple-touch-icon-144x144.png}">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-96x96.png}" sizes="96x96">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-16x16.png}" sizes="16x16">
+    <link rel="shortcut icon" th:href="@{images/favicons/favicon.ico}"> </head>
+
+<body class="pace-on pace-counter">
+<div th:replace="layouts/header"> </div>
+
+<div id="content" role="main">
+    <article>
+        <section class="section">
+            <div class="background-media" style="background-image: url(&#039;http://wp-dev.oxygenna.com/lambda-medical/wp-content/uploads/sites/18/2014/09/img4-notinclude.jpg&#039;); background-repeat:no-repeat; background-size:cover; background-attachment:fixed; background-position: 50% 0%;">
+            </div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(44,137,159,0.2);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 text-center small-screen-center">
+                        <h1 class="text-center element-top-100 element-bottom-100 text-light normal regular">Start using Medicis<br> by typing email token</h1> </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section" th:if="${tokenVerified==null}">
+             <div class="background-overlay grid-overlay-0" style="background-color: rgba(255,255,255,0);"></div>
+             <div class="container">
+                 <div class="row">
+                     <div class="col-md-12 text-center small-screen-center col-border-bottom">
+                         <div>
+                             <div class="row">
+                             <div class="col-md-offset-4 col-md-6  small-screen-center">
+                                 <div class="divider-wrapper">
+                                     <div class="visible-xs element-height-80"></div>
+                                     <div class="visible-sm element-height-80"></div>
+                                     <div class="visible-md element-height-80"></div>
+                                     <div class="visible-lg element-height-80"></div>
+                                 </div>
+                                 <form th:object="${token}" id="form_token" th:action="@{/verify-email}" th:method="post" class="contact-form form-horizontal">
+                                     <div class="row">
+                                         <div class="col-md-9">
+                                             <div class="form-group form-icon-group"> <i class="fa fa-key"></i>
+                                                 <input class="form-control" th:field="*{token}" id="token" name="token" placeholder="Type in token *" type="text" required="">
+                                                 <span th:if="${#fields.hasErrors('token')}" class="validation" th:errors="*{token}">Name Error</span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="row">
+                                         <div class="col-md-9">
+                                             <div class="text-center">
+                                                 <input type="submit" onclick="funkcija()" value="Verify" class="btn btn-primary">
+                                             </div>
+                                         </div>
+                                     </div>
+
+                                     <div class="messages text-center"></div>
+                                 </form>
+                                 <div class="divider-wrapper">
+                                     <div class="visible-xs element-height-80"></div>
+                                     <div class="visible-sm element-height-80"></div>
+                                     <div class="visible-md element-height-80"></div>
+                                     <div class="visible-lg element-height-80"></div>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" th:if="${tokenVerified!=null}">
+            <div class="background-media skrollable skrollable-between" style="background-repeat: no-repeat; background-size: cover; background-attachment: fixed; background-position: 50% -29.4253px;" data-start="background-position: 50% -31px" data-0-top-bottom="background-position: 50% 50px"></div>
+            <div class="background-overlay grid-overlay-0 " style="background-color: rgba(1,192,225,0.8);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 text-center"></div>
+                    <div class="col-md-8 text-center">
+                        <h1 class="element-top-70 text-light os-animation bigger default animated fadeIn" data-os-animation="fadeIn" data-os-animation-delay="0s" style="animation-delay: 0s;">
+                            Email verified successfully!
+                        </h1>
+                        <div class="divider-border divider-border-center element-top-10 element-bottom-10 os-animation animated fadeIn" data-os-animation="fadeIn" data-os-animation-delay="0.1s" style="height: 3px; animation-delay: 0.1s;">
+                            <div class="divider-border-inner" style="background:#ffffff; width:60px;"></div>
+                        </div>
+                        <p class="lead text-center center text-light element-bottom-40" data-os-animation="none" data-os-animation-delay="0s"> Now you can start experiencing<a href="/"><strong> best health care</strong></a>.
+                            <br> Choose between  </p>
+                        <a th:href="@{/login-register}" class="btn btn-primary btn-lg text-light btn-icon-right add-margin element-bottom-40 os-animation animated fadeIn" target="_self" data-os-animation="fadeIn" data-os-animation-delay="0s" style="animation-delay: 0s;">
+                        Login<i class="fa fa-user" data-animation="none"></i>
+                        </a>
+                        <p class="lead text-center center text-light element-bottom-40" data-os-animation="none" data-os-animation-delay="0s">or</p>
+                        <div class="element-bottom-70 os-animation animated fadeIn" data-os-animation="fadeIn" data-os-animation-delay="0s" style="animation-delay: 0s;">
+                            <a th:href="@{/}" class="btn btn-primary btn-lg text-light btn-icon-right add-margin element-bottom-40 os-animation animated fadeIn" target="_self" data-os-animation="fadeIn" data-os-animation-delay="0s" style="animation-delay: 0s;">
+                                Go back to Home<i class="fa fa-home" data-animation="none"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 "></div>
+                </div>
+            </div>
+        </section>
+    </article>
+    <div th:replace="layouts/footer"> </div>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+</div>
+<script>
+    function funkcija(){
+        document.getElementById("form_token").submit();
+    }
+</script>
+<script type="text/javascript">
+    var oxyThemeData = {
+        navbarHeight: 100,
+        navbarScrolled: 90,
+        navbarScrolledPoint: 20,
+        menuClose: 'off',
+        scrollFinishedMessage: 'No more items to load.',
+        hoverMenu:
+            {
+                hoverActive: false,
+                hoverDelay: 1,
+                hoverFadeDelay: 200
+            },
+        siteLoader: 'on'
+    };
+</script>
+<script th:src="@{js/theme.js}"></script>
+</body>
+
+</html>

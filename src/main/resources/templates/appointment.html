@@ -1,0 +1,177 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
+<head xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title> Medical | Hospitals</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link href="//fonts.googleapis.com/css?family=Roboto%7CRoboto+Condensed:300,400%7CGentium+Basic:400italic&amp;subset=latin,latin,latin"
+          rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" th:href="@{css/extras.min.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{css/theme.min.css}">
+    <link rel="stylesheet" th:href="@{css/medical.min.css}">
+    <link rel="stylesheet"  th:href="@{/css/bootstrap-datetimepicker.min.css}">
+    <link rel="stylesheet" th:href="@{/css/easy-autocomplete.min.css}">
+    <link rel="stylesheet" th:href="@{/css/easy-autocomplete.themes.min.css}">
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{images/favicons/apple-touch-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{images/favicons/apple-touch-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{images/favicons/apple-touch-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{images/favicons/apple-touch-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{images/favicons/apple-touch-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{images/favicons/apple-touch-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{images/favicons/apple-touch-icon-144x144.png}">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-96x96.png}" sizes="96x96">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-16x16.png}" sizes="16x16">
+    <link rel="shortcut icon" th:href="@{images/favicons/favicon.ico}">
+</head>
+<body class="pace-on pace-counter">
+<div th:replace="layouts/header"></div>
+<div id="content" role="main">
+    <article>
+        <section class="section">
+            <div class="background-media"
+                 style="background-image: url(images/medical/img7-notinclude.jpg); background-repeat:no-repeat; background-size:cover; background-attachment:fixed; background-position: 50% 0%;"></div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(44,137,159,0.2);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <h1 class="text-center element-top-100 element-bottom-100 text-light normal regular">Find the
+                            best hospitals in the world on Medicis
+                        </h1>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section" style="overflow: visible; z-index: 1000">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="list-container row element-top-50 element-bottom-50 os-animation"
+                             data-os-animation="fadeIn" data-os-animation-delay="0.1s">
+                            <form th:object="${appointment}" th:action="@{/make-appointment}"
+                                  class="form-horizontal" id="appointmentForm" method="POST">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-offset-4 col-md-5 input-group">
+                                            <input class="form-control" th:field="*{diagnosis}"
+                                                   placeholder="Type in diagnosis *"  type="text" required=""
+                                                   autocomplete="off">
+                                            <span th:if="${#fields.hasErrors('diagnosis')}" class="validation"
+                                                  th:errors="*{diagnosis}">Name Error</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-offset-4 col-md-5 input-group">
+                                            <input class="form-control" th:field="*{hospital}"
+                                                   placeholder="Type in hospital *"  type="text" required=""
+                                                   autocomplete="off">
+                                            <span th:if="${#fields.hasErrors('hospital')}" class="validation"
+                                                  th:errors="*{hospital}">Name Error</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="input-group date form_datetime col-md-offset-4 col-md-5"
+                                             data-date-format="dd MM yyyy - HH:ii"
+                                             data-link-field="dtp_input1">
+                                            <input class="form-control" size="16" type="text" placeholder="Select departure date" value="" readonly>
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-th"></span></span>
+                                        </div>
+                                        <input id="dtp_input1" type="text"  th:field="*{dateOfAppointment}"  hidden/><br/>
+                                        <span th:if="${#fields.hasErrors('dateOfAppointment')}" class="validation"
+                                              th:errors="*{dateOfAppointment}">Name Error</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="input-group col-md-offset-5 col-md-6">
+                                            <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="background-media"
+                 style="background-size:cover; background: #f2f2f2 no-repeat fixed 50% 0%;"></div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(255,255,255,0);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center small-screen-center">
+                        <div class="divider-wrapper">
+                            <div class="visible-xs element-height-80"></div>
+                            <div class="visible-sm element-height-80"></div>
+                            <div class="visible-md element-height-80"></div>
+                            <div class="visible-lg element-height-80"></div>
+                        </div>
+
+                        <div class="divider-wrapper">
+                            <div class="visible-xs element-height-80"></div>
+                            <div class="visible-sm element-height-80"></div>
+                            <div class="visible-md element-height-80"></div>
+                            <div class="visible-lg element-height-80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+    <div th:replace="layouts/footer"></div>
+</div>
+
+<script th:src="@{js/theme.min.js}"></script>
+<script th:src="@{js/revolution.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/js/jquery.easy-autocomplete.min.js}"></script>
+<script>
+    var options = {
+        url: "http://localhost:8080/diagnosis",
+        getValue: "diagnosis",
+        list: {
+            match: {
+                enabled: true
+            }
+        }
+    };
+    $("#diagnosis").easyAutocomplete(options);
+
+     options = {
+        url: "http://localhost:8080/hospitals-api",
+        getValue: "fullName",
+        list: {
+            match: {
+                enabled: true
+            }
+        }
+    };
+    $("#hospital").easyAutocomplete(options);
+
+    $('.form_datetime').datetimepicker({
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        format: 'yyyy-MM-dd HH:mm'
+    });
+</script>
+</body>
+</html>

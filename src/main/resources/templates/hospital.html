@@ -1,0 +1,532 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
+<head xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title th:text="${'Medical | ' + hospital.fullName }"> Medical | Hospital</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link href="//fonts.googleapis.com/css?family=Roboto%7CRoboto+Condensed:300,400%7CGentium+Basic:400italic&amp;subset=latin,latin,latin"
+          rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" th:href="@{/css/extras.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/theme.min.css}">
+    <link rel="stylesheet" th:href="@{/css/easy-autocomplete.min.css}">
+    <link rel="stylesheet" th:href="@{/css/easy-autocomplete.themes.min.css}">
+    <link rel="stylesheet"  th:href="@{/css/bootstrap-datetimepicker.min.css}">
+    <!--TODO popravi medical css da je minified-->
+    <link rel="stylesheet" th:href="@{/css/medical.min.css}">
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/images/favicons/apple-touch-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/images/favicons/apple-touch-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/images/favicons/apple-touch-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/images/favicons/apple-touch-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/images/favicons/apple-touch-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/images/favicons/apple-touch-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{images/favicons/apple-touch-icon-144x144.png}">
+    <link rel="icon" type="image/png" th:href="@{/images/favicons/favicon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-96x96.png}" sizes="96x96">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-16x16.png}" sizes="16x16">
+    <link rel="shortcut icon" th:href="@{/images/favicons/favicon.ico}">
+</head>
+<body class="pace-on pace-counter">
+<div th:replace="layouts/header"></div>
+<div id="content" role="main">
+    <article>
+        <section class="section">
+            <div class="background-media"
+                 style="background-size:cover; background: url(/images/medical/bg1_0.jpeg) no-repeat fixed 50% 0;"></div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(44,137,159,0.2);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <h1 class="text-center element-top-100 element-bottom-100 text-light normal regular">Find the
+                            best hospitals in the world on Medicis
+                        </h1>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <section th:if="${isHospital != null}" id="hospitalSection" class="section">
+            <div class="background-media"
+                 style="background-size:cover; background: #f2f2f2 no-repeat fixed 50% 0;"></div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(255,255,255,0);"></div>
+            <div class="container" id="infoContainer">
+                <div class="row">
+                    <div class="col-md-8 text-center">
+                        <ul role="tablist" class="nav nav-pills" id="nav-pills">
+                            <li class="active">
+                                <a th:href="@{/hospital/} + ${hospital.id}">About the Hospital</a>
+                            </li>
+                            <li class="">
+                                <a th:href="@{/hospital/} + ${hospital.id } + @{/employees} ">Employees</a>
+                            </li>
+                            <li class="">
+                                <a th:href="@{/hospital/} + ${hospital.id } + @{/appointment}">Send request for
+                                    appointment</a>
+                            </li>
+                        </ul>
+                        <div class="carousel slide accommodation-carousel">
+                            <div class="card  card-carousel">
+                                <div data-ride="carousel" class="carousel slide" id="carousel-generic">
+                                    <div data-ride="carousel" class="carousel slide">
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li class="active" data-slide-to="0" data-target="#carousel-generic"></li>
+                                            <li data-slide-to="1" data-target="#carousel-generic"></li>
+                                            <li data-slide-to="2" data-target="#carousel-generic"></li>
+                                            <li data-slide-to="3" data-target="#carousel-generic"></li>
+                                        </ol>
+
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner">
+                                            <div class="item active"
+                                                 style="background: url(https://bookinghealth.info/uploads/clinics/gallery/m/2059-junguniversitaetsklinik5.jpg) no-repeat scroll left center / cover;height: 600px;">
+                                                <img
+                                                        src=" ">
+                                            </div>
+                                            <div class="item "
+                                                 style="background: url(https://bookinghealth.info/uploads/clinics/gallery/m/7197-University-Hospital-Ulm_Patientenzimmer_1280.jpg) no-repeat scroll left center / cover;height: 600px;">
+                                                <img
+                                                        src="">
+                                            </div>
+                                            <div class="item "
+                                                 style="background: url(https://bookinghealth.info/uploads/clinics/gallery/m/9904-ulm-1.JPG) no-repeat scroll left center / cover;height: 600px;">
+                                                <img
+                                                        src=" ">
+                                            </div>
+                                            <div class="item "
+                                                 style="background: url(https://bookinghealth.info/uploads/clinics/gallery/m/7300-00_rathaus.jpg) no-repeat scroll left center / cover;height: 600px;">
+                                                <img
+                                                        src=" ">
+                                            </div>
+                                        </div>
+
+                                        <!-- Controls -->
+                                        <a data-slide="prev"
+                                           href="https://bookinghealth.com/university-hospital-ulm#carousel-generic"
+                                           class="left carousel-control">
+                                            <i class="material-icons">keyboard_arrow_left</i>
+                                        </a>
+                                        <a data-slide="next"
+                                           href="https://bookinghealth.com/university-hospital-ulm#carousel-generic"
+                                           class="right carousel-control">
+                                            <i class="material-icons">keyboard_arrow_right</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="title" th:text="${'About us ' + hospital.fullName}"></h1>
+                                <p style="text-align:justify">Ulm University Clinic is one of five university clinics in
+                                    Baden-Württemberg and a clinic with the highest level of services in Germany, which
+                                    offers the
+                                    university medicine of the highest level to the population of Ostwürttemberg,
+                                    Donau/Iller and&nbsp;
+                                    Bodensee-Oberschwaben.</p>
+                                <p style="text-align:justify">The patients who live far outside these regions also trust
+                                    the skills
+                                    of the highly qualified team of doctors with international reputation, competent and&nbsp;
+                                    compassionate medical staff, as well as specialists of the technical service&nbsp;
+                                    and
+                                    laboratories. Ulm University Clinic provides interdisciplinary medical services of
+                                    the highest
+                                    class, which combines patient care, research and education. Thus, the new scientific
+                                    knowledge
+                                    is quickly implemented in diagnostics and treatment. The highly qualified doctors
+                                    and nurses
+                                    ensure round the clock care for the patients' health. 192,000 cases per quarter are
+                                    dealt with
+                                    by nearly 6,000 physicians and staff.</p>
+                                <p style="text-align:justify">The clinic offers a full range of medical care in Germany.
+                                    Specialized
+                                    areas which have received wide recognition. Ulm University Clinic also has an
+                                    excellent
+                                    reputation far beyond the borders of Germany and has many years of experience in the
+                                    treatment
+                                    and care of foreign patients. The Clinic is pleased to welcome the patients from all
+                                    over the
+                                    world, seeking treatment in Germany and taking advantage of the high standards of
+                                    scientific
+                                    research, medical treatment and patient care.</p>
+                                <p style="text-align:justify"><strong>The University Hospital Ulm is included in the
+                                    Focus magazine
+                                    rating of top German hospitals 2017!</strong></p>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="map"></div>
+                        </div>
+                        <div class="divider-wrapper">
+                            <div class="visible-xs element-height-80"></div>
+                            <div class="visible-sm element-height-80"></div>
+                            <div class="visible-md element-height-80"></div>
+                            <div class="visible-lg element-height-80"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
+                        <div id="calc" style="margin-top: 120px;" class="">
+                            <div class="card card-signup" style="padding: 25px 25px 5px">
+                                <div class="header header-primary text-center"
+                                     style="padding-top: 0; padding-bottom: 0; margin-left: 15px;    margin-top: -65px; background: #777;">
+                                    <button class="btn">Receive an offer
+                                        for
+                                        treatment
+                                    </button>
+                                </div>
+                                <ul class="simple">
+                                    <li>
+                                        <h3 th:text="${hospital.fullName}"></h3>
+                                    </li>
+                                    <li th:text="${hospital.city} + ', ' + ${hospital.country}">
+
+                                    </li>
+                                </ul>
+
+                                <div class="alert alert-info-hospital motiv_calc hidden-sm hidden-xs"
+                                     style=" padding:25px 25px 25px 35px;  opacity: 0.65; background: #eeeeee; color: #000000; width: 100%;">
+                                    <div class="alert-icon clinic_icon_people"><br>
+                                        <i class="material-icons">people</i><br><br>
+                                    </div>
+                                    <b> Amount of beds available:</b> <span class="number_format"
+                                                                            th:text="${hospital.amountOfBeds}"></span>
+                                    <br><b>
+                                    Patients yearly: </b> <span class="number_format"
+                                                                th:text="${hospital.yearlyPatients}"></span> <br>
+                                </div>
+
+
+                                <div style="padding: 25px 25px 0;" id="r_s_panel">
+
+                                </div>
+
+                                <div class="content" style="padding: 10px 25px 25px;">
+                                    <a th:href="@{/hospital/} + ${hospital.id } + @{/appointment}">
+                                        <button style=" width: 100%; font-weight: bold; font-size: 14px; margin-top: 12px;"
+                                                class="btn btn-raised btn-warning">Send request to hospital
+                                        </button>
+                                    </a>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section th:if="${isEmployee != null}" id="employeeSection" class="section">
+            <div class="background-media"
+                 style="background-size:cover; background: #f2f2f2 no-repeat fixed 50% 0;"></div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(255,255,255,0);"></div>
+            <div class="container" id="infoContainer">
+                <div class="row">
+                    <div class="col-md-8 text-center">
+                        <ul role="tablist" class="nav nav-pills" id="nav-pills">
+                            <li class="">
+                                <a th:href="@{/hospital/} + ${hospital.id}">About the Hospital</a>
+                            </li>
+                            <li class="active">
+                                <a th:href="@{/hospital/} + ${hospital.id } + @{/employees} ">Employees</a>
+                            </li>
+                            <li class="">
+                                <a th:href="@{/hospital/} + ${hospital.id } + @{/appointment}">Send request for
+                                    appointment</a>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="title" th:text="${'Our employees'}"></h1>
+                                <div class="card card-dep">
+                                    <a href="https://bookinghealth.com/university-hospital-ulm/departments/228411-department-of-general-and-abdominalal-surgery.html"
+                                       class="navigate-right">
+                                        <th:block th:each="hospitalEmployee : ${hospitalEmployees}">
+                                            <div class="row vertical-align">
+                                                <div class="col-md-3 text-center">
+
+                                                    <img src="https://bookinghealth.info/uploads/clinics/departments/569df1cebe3ad.png"
+                                                         class="rImg">
+
+                                                    <div class="d-sig"
+                                                         th:utext="${hospitalEmployee.title} + ' <br> ' + ${hospitalEmployee.fName} + ' ' + ${hospitalEmployee.lName}">
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-7" style="padding-bottom: 20px">
+                                                    <h2 th:text="${hospitalEmployee.title} + ' ' + ${hospitalEmployee.fName} + ' ' + ${hospitalEmployee.lName}"></h2>
+                                                    <p style="text-align: justify;"
+                                                       th:text="${hospitalEmployee.employeeMessage}">In order to
+                                                        maximize the healthcare, the range of services of the university
+                                                        clinic and Department of General and Abdominal Surgery at Ulm
+                                                        University Clinic covers both scheduled surgeries and emergency
+                                                        medical care in the field of General and Abdominal Surgery.</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </th:block>
+                                    </a>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="map"></div>
+                        </div>
+                        <div class="divider-wrapper">
+                            <div class="visible-xs element-height-80"></div>
+                            <div class="visible-sm element-height-80"></div>
+                            <div class="visible-md element-height-80"></div>
+                            <div class="visible-lg element-height-80"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
+                        <div id="calc" style="margin-top: 120px;" class="">
+                            <div class="card card-signup" style="padding: 25px 25px 5px">
+                                <div class="header header-primary text-center"
+                                     style="padding-top: 0; padding-bottom: 0; margin-left: 15px;    margin-top: -65px; background: #777;">
+                                    <button class="btn">Receive an offer
+                                        for
+                                        treatment
+                                    </button>
+                                </div>
+                                <ul class="simple">
+                                    <li>
+                                        <h3 th:text="${hospital.fullName}"></h3>
+                                    </li>
+                                    <li th:text="${hospital.city} + ', ' + ${hospital.country}">
+
+                                    </li>
+                                </ul>
+
+                                <div class="alert alert-info-hospital motiv_calc hidden-sm hidden-xs"
+                                     style=" padding:25px 25px 25px 35px;  opacity: 0.65; background: #eeeeee; color: #000000; width: 100%;">
+                                    <div class="alert-icon clinic_icon_people"><br>
+                                        <i class="material-icons">people</i><br><br>
+                                    </div>
+                                    <b> Amount of beds available:</b> <span class="number_format"
+                                                                            th:text="${hospital.amountOfBeds}"></span>
+                                    <br><b>
+                                    Patients yearly: </b> <span class="number_format"
+                                                                th:text="${hospital.yearlyPatients}"></span> <br>
+                                </div>
+
+
+                                <div style="padding: 25px 25px 0;" id="r_s_panel">
+
+                                </div>
+
+                                <div class="content" style="padding: 10px 25px 25px;">
+                                    <a th:href="@{/hospital/} + ${hospital.id } + @{/appointment}">
+                                        <button style=" width: 100%; font-weight: bold; font-size: 14px; margin-top: 12px;"
+                                                class="btn btn-raised btn-warning">Send request to hospital
+                                        </button>
+                                    </a>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section th:if="${isAppointment != null}" id="appointmentSection" class="section">
+            <div class="background-media"
+                 style="background-size:cover; background: #f2f2f2 no-repeat fixed 50% 0;"></div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(255,255,255,0);"></div>
+            <div class="container" id="infoContainer">
+                <div class="row">
+                    <br>
+                    <div th:if="${appointmentCreated} != null" class="alert alert-info z-depth-1 text-center">
+                        Appointment created. Our staff will contact you soon.
+                    </div>
+                    <div class="col-md-8 text-center">
+                        <ul role="tablist" class="nav nav-pills" id="nav-pills">
+                            <li class="">
+                                <a th:href="@{/hospital/} + ${hospital.id}">About the Hospital</a>
+                            </li>
+                            <li class="">
+                                <a th:href="@{/hospital/} + ${hospital.id } + @{/employees} ">Employees</a>
+                            </li>
+                            <li class="active">
+                                <a th:href="@{/hospital/} + ${hospital.id } + @{/appointment}">Send request for
+                                    appointment</a>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="title" th:text="${'Send request for appointment'}"></h1>
+                                <form th:object="${appointment}" id="form_appointment"
+                                      th:action="@{/hospital/} + ${hospital.id } + @{/appointment}" method="POST"
+                                      class="contact-form form-horizontal">
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <div class="form-group">
+                                                <input class="form-control" th:field="*{diagnosis}"
+                                                       placeholder="Type in diagnosis *"  type="text" required=""
+                                                       autocomplete="off">
+                                                <span th:if="${#fields.hasErrors('diagnosis')}" class="validation"
+                                                      th:errors="*{diagnosis}">Name Error</span>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="dtp_input1" class="col-md-4 control-label">Select departure
+                                                    date</label>
+                                                <div class="input-group date form_datetime col-md-5"
+                                                     data-date-format="dd MM yyyy - HH:ii p"
+                                                     data-link-field="dtp_input1">
+                                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                                    <span class="input-group-addon"><span
+                                                            class="glyphicon glyphicon-th"></span></span>
+                                                </div>
+                                                 <input id="dtp_input1" type="text"  th:field="*{dateOfAppointment}"  hidden/><br/>
+                                               <span th:if="${#fields.hasErrors('dateOfAppointment')}" class="validation"
+                                                      th:errors="*{dateOfAppointment}">Name Error</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <input type="submit" onclick="funkcija()" value="Make an appointment"
+                                               class="btn btn-primary">
+                                    </div>
+                                    <div class="messages text-center"></div>
+                                </form>
+
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="map"></div>
+                        </div>
+                        <div class="divider-wrapper">
+                            <div class="visible-xs element-height-80"></div>
+                            <div class="visible-sm element-height-80"></div>
+                            <div class="visible-md element-height-80"></div>
+                            <div class="visible-lg element-height-80"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
+                        <div id="calc" style="margin-top: 120px;" class="">
+                            <div class="card card-signup" style="padding: 25px 25px 5px">
+                                <div class="header header-primary text-center"
+                                     style="padding-top: 0; padding-bottom: 0; margin-left: 15px;    margin-top: -65px; background: #777;">
+                                    <button class="btn">Receive an offer
+                                        for
+                                        treatment
+                                    </button>
+                                </div>
+                                <ul class="simple">
+                                    <li>
+                                        <h3 th:text="${hospital.fullName}"></h3>
+                                    </li>
+                                    <li th:text="${hospital.city} + ', ' + ${hospital.country}">
+
+                                    </li>
+                                </ul>
+
+                                <div class="alert alert-info-hospital motiv_calc hidden-sm hidden-xs"
+                                     style=" padding:25px 25px 25px 35px;  opacity: 0.65; background: #eeeeee; color: #000000; width: 100%;">
+                                    <div class="alert-icon clinic_icon_people"><br>
+                                        <i class="material-icons">people</i><br><br>
+                                    </div>
+                                    <b> Amount of beds available:</b> <span class="number_format"
+                                                                            th:text="${hospital.amountOfBeds}"></span>
+                                    <br><b>
+                                    Patients yearly: </b> <span class="number_format"
+                                                                th:text="${hospital.yearlyPatients}"></span> <br>
+                                </div>
+
+
+                                <div style="padding: 25px 25px 0;" id="r_s_panel">
+
+                                </div>
+
+                                <div class="content" style="padding: 10px 25px 25px;">
+                                    <a th:href="@{/hospital/} + ${hospital.id } + @{/appointment}">
+                                        <button style=" width: 100%; font-weight: bold; font-size: 14px; margin-top: 12px;"
+                                                class="btn btn-raised btn-warning">Send request to hospital
+                                        </button>
+                                    </a>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+    <div th:replace="layouts/footer"></div>
+</div>
+
+<script th:src="@{/js/theme.min.js}"></script>
+<script th:src="@{/js/revolution.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/js/jquery.easy-autocomplete.min.js}"></script>
+<script src="https://cdn.rawgit.com/leafo/sticky-kit/v1.1.2/jquery.sticky-kit.min.js"></script>
+<script>
+
+    function initMap() {
+        var myLatLng = {lat: 43.855345, lng: 18.423493};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Kosevo!'
+        });
+    }
+
+    var w = window.innerWidth;
+    if (w > 710) {
+        $("#calc").stick_in_parent({
+            parent: '#infoContainer',
+            offset_top: 50
+        })
+    }
+
+    function funkcija() {
+        document.getElementById("form_appointment").submit();
+    }
+
+    var options = {
+        url: "http://localhost:8080/diagnosis",
+        getValue: "diagnosis",
+        list: {
+            match: {
+                enabled: true
+            }
+        }
+    };
+    $("#diagnosis").easyAutocomplete(options);
+    $('.form_datetime').datetimepicker({
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        format: 'yyyy-MM-dd HH:mm'
+    });
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg73nbHsG2WWRld_QoXUmTOcR-oIlrZKA&callback=initMap">
+</script>
+</body>
+</html>
