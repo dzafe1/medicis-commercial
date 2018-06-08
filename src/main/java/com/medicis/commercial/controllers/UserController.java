@@ -9,6 +9,7 @@ import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.rest.api.v2010.account.MessageCreator;
 import com.twilio.type.PhoneNumber;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class UserController  {
@@ -75,5 +77,19 @@ public class UserController  {
     @GetMapping(value = "/register")
     public String register(){
         return "redirect:/login-register";
+    }
+
+    @GetMapping(value = "/user-profile")
+    public String userProfile(Model model){
+        User authUser = userService.findLoggedInUsername();
+        model.addAttribute("user",authUser);
+        return "user-profile";
+    }
+
+    @GetMapping(value = "/user-appointments")
+    public String userAppointments(Model model){
+        User authUser = userService.findLoggedInUsername();
+        model.addAttribute("user",authUser);
+        return "user-appointments";
     }
 }

@@ -44,6 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .and().authorizeRequests().antMatchers("/appointments/**").hasAuthority("USER")
+                .and().authorizeRequests().antMatchers("/user-profile").hasAuthority("USER")
+                .and().authorizeRequests().antMatchers("/user-appointments").hasAuthority("USER")
                 .and().exceptionHandling().accessDeniedPage("/access-denied")
                 .and()
                 .csrf();

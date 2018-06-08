@@ -1,0 +1,167 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
+
+<head xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title> User profile | Medical</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link href="//fonts.googleapis.com/css?family=Roboto%7CRoboto+Condensed:300,400%7CGentium+Basic:400italic&amp;subset=latin,latin,latin"
+          rel="stylesheet" type="text/css">
+    <link rel="stylesheet" th:href="@{css/extras.min.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{css/theme.min.css}">
+    <link rel="stylesheet" th:href="@{css/medical.min.css}">
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{images/favicons/apple-touch-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{images/favicons/apple-touch-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{images/favicons/apple-touch-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{images/favicons/apple-touch-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{images/favicons/apple-touch-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{images/favicons/apple-touch-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{images/favicons/apple-touch-icon-144x144.png}">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-96x96.png}" sizes="96x96">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-16x16.png}" sizes="16x16">
+    <link rel="shortcut icon" th:href="@{images/favicons/favicon.ico}">
+    <style>
+        #mytable tbody tr td{
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body class="pace-on pace-counter">
+<div th:replace="layouts/header"></div>
+
+<div id="content" role="main">
+    <article>
+        <section class="section">
+            <div class="background-media"
+                 style="background-image: url(&#039;http://wp-dev.oxygenna.com/lambda-medical/wp-content/uploads/sites/18/2014/09/img4-notinclude.jpg&#039;); background-repeat:no-repeat; background-size:cover; background-attachment:fixed; background-position: 50% 0%;">
+            </div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(44,137,159,0.2);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 text-center small-screen-center">
+                        <h1 class="text-center element-top-100 element-bottom-100 text-light normal regular">User
+                            profile section</h1></div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(255,255,255,0);"></div>
+            <div class="container">
+                <div class="row">
+
+                    <h3 class="text-center">Overview your appointments</h3>
+                    <a th:href="@{/hospital-profile}" style="display: inline-block;background: #eaeff2;border-radius: 4px;box-shadow: inset 0 -1px #bbbfc2;color: #4d4353;padding: 0.3em 0.8em;">
+                        <i class="fa fa-arrow-left"></i>
+                        Go Back
+                    </a>
+                    <div class="col-md-12 text-center small-screen-center col-border-bottom">
+                        <div class="row">
+                            <div class="col-md-12   small-screen-center">
+                                <div class="divider-wrapper">
+                                    <div class="visible-xs element-height-80"></div>
+                                    <div class="visible-sm element-height-80"></div>
+                                    <div class="visible-md element-height-80"></div>
+                                    <div class="visible-lg element-height-80"></div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table id="mytable" class="table table-bordred table-striped">
+                                        <thead>
+                                        <th>#</th>
+                                        <th>Patients name</th>
+                                        <th>Date</th>
+                                        <th>Diagnosis</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Neko Nekic </td>
+                                            <td>21.1.2017.</td>
+                                            <td>Nesto</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Neko Nekic </td>
+                                            <td>21.1.2017.</td>
+                                            <td>Nesto</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Neko Nekic </td>
+                                            <td>21.1.2017.</td>
+                                            <td>Nesto</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Neko Nekic </td>
+                                            <td>21.1.2017.</td>
+                                            <td>Nesto</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Neko Nekic </td>
+                                            <td>21.1.2017.</td>
+                                            <td>Nesto</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <ul class="pagination pull-right">
+                                        <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                                        <li class="active"><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="divider-wrapper">
+                                    <div class="visible-xs element-height-80"></div>
+                                    <div class="visible-sm element-height-80"></div>
+                                    <div class="visible-md element-height-80"></div>
+                                    <div class="visible-lg element-height-80"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+    <div th:replace="layouts/footer"></div>
+</div>
+<script th:src="@{js/theme.js}"></script>
+<!-- load contact form js -->
+<script th:src="@{js/contact.min.js}"></script>
+<script th:src="@{js/map.min.js}"></script>
+<script>
+    $(document).ready(function(){
+        $("#mytable #checkall").click(function () {
+            if ($("#mytable #checkall").is(':checked')) {
+                $("#mytable input[type=checkbox]").each(function () {
+                    $(this).prop("checked", true);
+                });
+
+            } else {
+                $("#mytable input[type=checkbox]").each(function () {
+                    $(this).prop("checked", false);
+                });
+            }
+        });
+
+        $("[data-toggle=tooltip]").tooltip();
+    });
+
+</script>
+</body>
+</html>

@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
@@ -45,6 +46,13 @@ public class User implements Serializable {
     @NotEmpty(message = "Please provide your email!")
     @Size(min=2, max=30,message = "Email must be greater then 2 characters")
     private String email;
+
+    @Column
+    @Pattern(regexp = "^(?:\\+\\d{1,3}|0\\d{1,3}|00\\d{1,2})?(?:\\s?\\(\\d+\\))?(?:[-\\/\\s.]|\\d)+$", message="Invalid phone number!")
+    private String phoneNumber;
+
+    @Column
+    private Boolean verifiedPhoneNumber;
 
     @Column(nullable = false)
     @Size(min=6, max=255,message = "Minimum 6 length!")
@@ -218,6 +226,23 @@ public class User implements Serializable {
         this.hospitalAppointment = hospitalAppointment;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Boolean getVerifiedPhoneNumber() {
+        return verifiedPhoneNumber;
+    }
+
+    public void setVerifiedPhoneNumber(Boolean verifiedPhoneNumber) {
+        this.verifiedPhoneNumber = verifiedPhoneNumber;
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
@@ -226,7 +251,10 @@ public class User implements Serializable {
                 ", lName='" + lName + '\'' +
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", verifiedPhoneNumber=" + verifiedPhoneNumber +
                 ", password='" + password + '\'' +
+                ", repeatPassword='" + repeatPassword + '\'' +
                 ", imgPath='" + imgPath + '\'' +
                 ", dob=" + dob +
                 ", created_at=" + created_at +

@@ -90,4 +90,14 @@ public class HospitalController {
     public List<Hospital> getAllHospitals(){
         return hospitalService.getAllHospitals();
     }
+
+    @GetMapping(value = "/hospital-appointments")
+    public String hospitalAppointments(){
+        return "hospital-appointments";
+    }
+
+    @GetMapping(value = "/hospital-profile")
+    public String hospitalProfile(){
+        return "hospital-profile";
+    }
 }
