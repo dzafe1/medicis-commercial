@@ -1,0 +1,367 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
+<head xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title th:text="${'Medical | ' + hospital.fullName }"> Medical | Hospital</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link href="//fonts.googleapis.com/css?family=Roboto%7CRoboto+Condensed:300,400%7CGentium+Basic:400italic&amp;subset=latin,latin,latin"
+          rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" th:href="@{/css/extras.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/theme.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datetimepicker.min.css}">
+    <!--TODO popravi medical css da je minified-->
+    <link rel="stylesheet" th:href="@{/css/medical.min.css}">
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/images/favicons/apple-touch-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/images/favicons/apple-touch-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/images/favicons/apple-touch-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/images/favicons/apple-touch-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/images/favicons/apple-touch-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/images/favicons/apple-touch-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{images/favicons/apple-touch-icon-144x144.png}">
+    <link rel="icon" type="image/png" th:href="@{/images/favicons/favicon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-96x96.png}" sizes="96x96">
+    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-16x16.png}" sizes="16x16">
+    <link rel="shortcut icon" th:href="@{/images/favicons/favicon.ico}">
+</head>
+<body class="pace-on pace-counter">
+<div th:replace="layouts/header" th:with="authUser"></div>
+<div id="content" role="main">
+    <article>
+        <section class="section">
+            <div class="background-media"
+                 style="background-size:cover; background: url(/images/medical/bg1_0.jpeg) no-repeat fixed 50% 0;"></div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(44,137,159,0.2);"></div>
+            <div class="container">
+                <div class="row">
+                    <div th:if="${updateSuccessfulEmployee} != null" class="alert alert-success z-depth-1 text-center">
+                       Employee updated!
+                    </div>
+                    <div th:if="${updateUnsuccessfulEmployee} != null" class="alert alert-danger z-depth-1 text-center">
+                        Employee update failed!
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <h1 class="text-center element-top-100 element-bottom-100 text-light normal regular">
+                            Edit Hospital Data
+                        </h1>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hospitalSection" class="section">
+            <div class="background-media"
+                 style="background-size:cover; background: #f2f2f2 no-repeat fixed 50% 0;"></div>
+            <div class="background-overlay grid-overlay-0" style="background-color: rgba(255,255,255,0);"></div>
+            <div class="container" id="infoContainer">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <ul role="tablist" class="nav nav-pills" id="nav-pills">
+                            <li class="active">
+                                <a th:href="@{/hospital/} + ${hospital.id}">Edit hospital</a>
+                            </li>
+                            <li class="">
+                                <a th:href="@{/hospital/} + ${hospital.id } ">View hospital profile</a>
+                            </li>
+                        </ul>
+                        <div class="carousel slide accommodation-carousel">
+                            <div class="card  card-carousel">
+                                <div data-ride="carousel" class="carousel slide" id="carousel-generic">
+                                    <div data-ride="carousel" class="carousel slide">
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li class="active" data-slide-to="0" data-target="#carousel-generic"></li>
+                                            <li data-slide-to="1" data-target="#carousel-generic"></li>
+                                            <li data-slide-to="2" data-target="#carousel-generic"></li>
+                                            <li data-slide-to="3" data-target="#carousel-generic"></li>
+                                        </ol>
+
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner">
+                                            <div class="item active"
+                                                 style="background: url(https://bookinghealth.info/uploads/clinics/gallery/m/2059-junguniversitaetsklinik5.jpg) no-repeat scroll left center / cover;height: 600px;">
+                                                <img
+                                                        src=" ">
+                                            </div>
+                                            <div class="item "
+                                                 style="background: url(https://bookinghealth.info/uploads/clinics/gallery/m/7197-University-Hospital-Ulm_Patientenzimmer_1280.jpg) no-repeat scroll left center / cover;height: 600px;">
+                                                <img
+                                                        src="">
+                                            </div>
+                                            <div class="item "
+                                                 style="background: url(https://bookinghealth.info/uploads/clinics/gallery/m/9904-ulm-1.JPG) no-repeat scroll left center / cover;height: 600px;">
+                                                <img
+                                                        src=" ">
+                                            </div>
+                                            <div class="item "
+                                                 style="background: url(https://bookinghealth.info/uploads/clinics/gallery/m/7300-00_rathaus.jpg) no-repeat scroll left center / cover;height: 600px;">
+                                                <img
+                                                        src=" ">
+                                            </div>
+                                        </div>
+
+                                        <!-- Controls -->
+                                        <a data-slide="prev"
+                                           href="https://bookinghealth.com/university-hospital-ulm#carousel-generic"
+                                           class="left carousel-control">
+                                            <i class="material-icons">keyboard_arrow_left</i>
+                                        </a>
+                                        <a data-slide="next"
+                                           href="https://bookinghealth.com/university-hospital-ulm#carousel-generic"
+                                           class="right carousel-control">
+                                            <i class="material-icons">keyboard_arrow_right</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card card-dep">
+                                    <h1 class="title" th:text="${'Edit general information''s '}"></h1>
+                                    <form class="form-horizontal" id="editHospital" th:object="${hospital}">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="fullName">Full Name</label>
+                                                <input id="fullName" class="form-control" th:field="*{fullName}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input id="email" class="form-control" th:field="*{email}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="address">Address</label>
+                                                <input id="address" class="form-control" th:field="*{address}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="city">City</label>
+                                                <input id="city" class="form-control" th:field="*{city}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="country">Country</label>
+                                                <input id="country" class="form-control" th:field="*{country}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="postalCode">Postal Code</label>
+                                                <input id="postalCode" type="number" class="form-control"
+                                                       th:field="*{postalCode}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="amountOfBeds">Amount Of Beds</label>
+                                                <input id="amountOfBeds" type="number" min="0" max="1000"
+                                                       class="form-control" th:field="*{amountOfBeds}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-md-offset-2">
+                                            <div class="form-group">
+                                                <label for="about">About Hospital</label>
+                                                <textarea id="about" class="form-control" rows="8"
+                                                          th:text="${hospital.aboutHospital}"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <div class="text-center">
+                                                    <input type="submit" value="Submit"
+                                                           class="btn btn-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="title">Password part</h1>
+                                <div class="card card-dep" style="padding-top: 1em;">
+                                    <form class="form-horizontal" id="changePassword">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="currentPassword">Current password</label>
+                                                <input id="currentPassword" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="password">New password</label>
+                                                <input id="password" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="repeat_password">Repeat password</label>
+                                                <input id="repeat_password" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <div class="text-center">
+                                                    <input type="submit" value="Submit"
+                                                           class="btn btn-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 1em;">
+                            <div class="col-md-12">
+                                <h1 class="title" th:text="${'Edit employees'}"></h1>
+                                <div class="card card-dep">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <div class="form-group">
+                                            <label for="employees">Choose employee</label>
+                                            <select id="employees" onchange="fillForm(this.value)">
+                                                <option value="" selected disabled>Employee</option>
+                                                <option th:each="hospitalEmployee : ${hospitalEmployees}"
+                                                        th:value="${hospitalEmployee.id}"
+                                                        th:text="${hospitalEmployee.fName} + ' ' + ${hospitalEmployee.lName}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <form class="form-horizontal" id="form_employee" method="POST" th:action="@{/edit-hospital-employee}">
+                                        <input type="hidden" id="employeeId" name="employeeId" value="">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="employeeEmail">Employees email</label>
+                                                <input id="employeeEmail" name="email"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="fName">Employees first name</label>
+                                                <input id="fName" name="fName"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="lName">Employees last name</label>
+                                                <input id="lName" name="lName"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <label for="title">Employees title</label>
+                                                <select id="title" name="title">
+                                                    <option value="" selected disabled>Title</option>
+                                                    <option value="Doctor">Doctor</option>
+                                                    <option value="Manager">Manager</option>
+                                                    <option value="Technician">Technician</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-md-offset-2">
+                                            <div class="form-group">
+                                                <label for="employeeMessage">Employee message</label>
+                                                <textarea id="employeeMessage" name="employeeMessage" class="form-control"
+                                                          rows="8"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
+                                                <div class="text-center">
+                                                    <input type="submit" value="Submit"
+                                                           class="btn btn-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="divider-wrapper">
+                        <div class="visible-xs element-height-80"></div>
+                        <div class="visible-sm element-height-80"></div>
+                        <div class="visible-md element-height-80"></div>
+                        <div class="visible-lg element-height-80"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </article>
+    <div th:replace="layouts/footer"></div>
+</div>
+
+<script th:src="@{/js/theme.min.js}"></script>
+<script th:src="@{/js/revolution.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/js/jquery.easy-autocomplete.min.js}"></script>
+<script src="https://cdn.rawgit.com/leafo/sticky-kit/v1.1.2/jquery.sticky-kit.min.js"></script>
+<script>
+
+    var w = window.innerWidth;
+    if (w > 710) {
+        $("#calc").stick_in_parent({
+            parent: '#infoContainer',
+            offset_top: 50
+        })
+    }
+
+
+    $('.form_datetime').datetimepicker({
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        format: 'yyyy-MM-dd HH:mm'
+    });
+</script>
+<script>
+    function fillForm(id) {
+        $.ajax({
+            url: '/employee/' + id,
+            method: 'GET',
+            success: function (msg) {
+                $("#employeeId").val(msg.id);
+                $("#employeeEmail").val(msg.email);
+                $("#fName").val(msg.fName);
+                $("#lName").val(msg.lName);
+                $("#title").val(msg.title);
+                $("#employeeMessage").html(msg.employeeMessage);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log(errorThrown + " " + xhr + " " + textStatus);
+                return false;
+            }
+        });
+    }
+</script>
+<div th:replace="layouts/support"></div>
+</body>
+</html>

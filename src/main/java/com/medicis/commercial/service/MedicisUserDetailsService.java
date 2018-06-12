@@ -35,7 +35,7 @@ public class MedicisUserDetailsService implements UserDetailsService {
                     true, authorities);
         }else{
             Hospital hospital = hospitalRepository.findOneByEmail(email);
-            Collection<? extends GrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority("Hospital"));
+            Collection<? extends GrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority(hospital.getRole()));
             return new org.springframework.security.core.userdetails.User(hospital.getEmail(), hospital.getPassword(),hospital.getActive(),true,true,
                     true,  authorities);
         }

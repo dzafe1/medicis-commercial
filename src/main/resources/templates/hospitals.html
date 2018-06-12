@@ -29,7 +29,7 @@
     <link rel="shortcut icon" th:href="@{images/favicons/favicon.ico}">
 </head>
 <body class="pace-on pace-counter">
-<div th:replace="layouts/header"></div>
+<div th:replace="layouts/header" th:with="authUser"></div>
 <div id="content" role="main">
     <article>
         <section class="section">
@@ -232,5 +232,6 @@
     };
     $("#diagnosis").easyAutocomplete(options);
 </script>
+<div th:replace="layouts/support"></div>
 </body>
 </html>

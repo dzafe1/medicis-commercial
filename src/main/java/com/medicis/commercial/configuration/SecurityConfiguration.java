@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled=true)
+@EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
@@ -46,6 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/appointments/**").hasAuthority("USER")
                 .and().authorizeRequests().antMatchers("/user-profile").hasAuthority("USER")
                 .and().authorizeRequests().antMatchers("/user-appointments").hasAuthority("USER")
+                .and().authorizeRequests().antMatchers("/hospital-profile").hasAuthority("HOSPITAL")
+                .and().authorizeRequests().antMatchers("/hospital-appointments").hasAuthority("HOSPITAL")
                 .and().exceptionHandling().accessDeniedPage("/access-denied")
                 .and()
                 .csrf();

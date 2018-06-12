@@ -2,6 +2,7 @@ package com.medicis.commercial.controllers;
 
 import com.medicis.commercial.domain.Diagnosis;
 import com.medicis.commercial.service.DiagnosisService;
+import com.medicis.commercial.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,9 @@ import java.util.List;
 public class DiagnosisController {
     @Autowired
     DiagnosisService diagnosisService;
+
+    @Autowired
+    UserService userService;
 
     @GetMapping(value = "/diagnosis")
     @ResponseBody

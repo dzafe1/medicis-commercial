@@ -82,6 +82,9 @@ public class Hospital implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hospital")
     private List<HospitalAppointment> hospitalAppointment = new ArrayList<HospitalAppointment>();
 
+    @Column(name="role",columnDefinition="VARCHAR(45) default 'HOSPITAL'")
+    private String role;
+
     public Hospital() {
     }
 
@@ -97,6 +100,7 @@ public class Hospital implements Serializable {
         this.amountOfBeds = amountOfBeds;
         this.yearlyPatients = yearlyPatients;
         this.active = active;
+        this.role = "HOSPITAL";
     }
 
     public Long getId() {
@@ -225,6 +229,14 @@ public class Hospital implements Serializable {
 
     public void setHospitalAppointment(List<HospitalAppointment> hospitalAppointment) {
         this.hospitalAppointment = hospitalAppointment;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

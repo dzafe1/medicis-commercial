@@ -37,7 +37,7 @@ public class UserService{
 
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    HospitalService hospitalService;
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -76,30 +76,26 @@ public class UserService{
     }
 
 
-    public User findLoggedInUsername() {
+    public Object findLoggedInUsername() {
         try {
             UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            return getUserByEmail(principal.getUsername());
+            String role = principal.getAuthorities().iterator().next().toString();
+            switch (role) {
+                case "USER":
+                    return getUserByEmail(principal.getUsername());
+                case "HOSPITAL":
+                    return hospitalService.getHospitalByEmail(principal.getUsername());
+                default:
+                    return null;
+            }
         }catch (java.lang.ClassCastException e){
             logger.info(e.getLocalizedMessage());
             return null;
         }
-
     }
+
     private User getUserByEmail(String email){
         return userRepository.getByEmail(email);
     }
-
-   /* public void autoLogin(HttpServletRequest request,User user) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, "HarisHaris", userDetails.getAuthorities());
-        usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetails(request));
-        authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-
-        if (usernamePasswordAuthenticationToken.isAuthenticated()) {
-            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            logger.debug(String.format("Auto login %s successfully!", user.getEmail()));
-        }
-    }*/
 
 }

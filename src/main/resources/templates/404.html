@@ -9,24 +9,24 @@
     <title> Medical | Book</title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link href="//fonts.googleapis.com/css?family=Roboto%7CRoboto+Condensed:300,400%7CGentium+Basic:400italic&amp;subset=latin,latin,latin" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" th:href="@{css/extras.min.css}">
-    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{css/theme.min.css}">
-    <link rel="stylesheet" th:href="@{css/medical.min.css}">
-    <link rel="apple-touch-icon" sizes="57x57" th:href="@{images/favicons/apple-touch-icon-57x57.png}">
-    <link rel="apple-touch-icon" sizes="60x60" th:href="@{images/favicons/apple-touch-icon-60x60.png}">
-    <link rel="apple-touch-icon" sizes="72x72" th:href="@{images/favicons/apple-touch-icon-72x72.png}">
-    <link rel="apple-touch-icon" sizes="76x76" th:href="@{images/favicons/apple-touch-icon-76x76.png}">
-    <link rel="apple-touch-icon" sizes="114x114" th:href="@{images/favicons/apple-touch-icon-114x114.png}">
-    <link rel="apple-touch-icon" sizes="120x120" th:href="@{images/favicons/apple-touch-icon-120x120.png}">
-    <link rel="apple-touch-icon" sizes="144x144" th:href="@{images/favicons/apple-touch-icon-144x144.png}">
-    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-32x32.png}" sizes="32x32">
-    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-96x96.png}" sizes="96x96">
-    <link rel="icon" type="image/png" th:href="@{images/favicons/favicon-16x16.png}" sizes="16x16">
-    <link rel="shortcut icon" th:href="@{images/favicons/favicon.ico}"> </head>
+    <link rel="stylesheet" th:href="@{/css/extras.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/theme.min.css}">
+    <link rel="stylesheet" th:href="@{/css/medical.min.css}">
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/images/favicons/apple-touch-icon-57x57.png}">
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{/images/favicons/apple-touch-icon-60x60.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/images/favicons/apple-touch-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/images/favicons/apple-touch-icon-76x76.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/images/favicons/apple-touch-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/images/favicons/apple-touch-icon-120x120.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/images/favicons/apple-touch-icon-144x144.png}">
+    <link rel="icon" type="image/png" th:href="@{/images/favicons/favicon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{/images/favicons/favicon-96x96.png}" sizes="96x96">
+    <link rel="icon" type="image/png" th:href="@{/images/favicons/favicon-16x16.png}" sizes="16x16">
+    <link rel="shortcut icon" th:href="@{/images/favicons/favicon.ico}"> </head>
 
 <body class="pace-on pace-counter">
-    <div th:replace="layouts/header"> </div>
+<div th:replace="layouts/header" th:with="authUser"></div>
     <div id="content" role="main">
         <article>
             <section class="section">
@@ -80,8 +80,8 @@
             siteLoader: 'on'
         };
     </script>
-    <script th:src="@{js/theme.min.js}"></script>
-    <script th:src="@{js/revolution.min.js}"></script>
+    <script th:src="@{/js/theme.min.js}"></script>
+    <script th:src="@{/js/revolution.min.js}"></script>
     <script type="text/javascript">
         jQuery(document).ready(function()
         {
@@ -125,6 +125,6 @@
             });
         });
     </script>
+    <div th:replace="layouts/support"></div>
 </body>
-
 </html>

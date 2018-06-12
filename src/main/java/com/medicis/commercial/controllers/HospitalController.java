@@ -1,27 +1,21 @@
 package com.medicis.commercial.controllers;
 
 
-import com.medicis.commercial.domain.Diagnosis;
 import com.medicis.commercial.domain.Hospital;
 import com.medicis.commercial.domain.In.AppointmentIn;
 import com.medicis.commercial.service.HospitalAppointmentService;
 import com.medicis.commercial.service.HospitalEmployeeService;
 import com.medicis.commercial.service.HospitalService;
-import org.joda.time.DateTime;
+import com.medicis.commercial.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 
@@ -36,16 +30,26 @@ public class HospitalController {
     @Autowired
     HospitalAppointmentService hospitalAppointmentService;
 
+    @Autowired
+    UserService userService;
+
 
     @GetMapping(value = "/hospitals")
     public String hospitals(Model model){
         model.addAttribute("hospitals",hospitalService.getAllHospitals());
+        Object authUser = userService.findLoggedInUsername();
+        model.addAttribute("authUser",authUser);
         return "hospitals";
     }
     @GetMapping(value = "/hospital/{id}")
     public String hospital(Model model,@PathVariable Long id){
         model.addAttribute("isHospital",true);
         model.addAttribute("hospital",hospitalService.getHospitalById(id));
+        Object object = userService.findLoggedInUsername();
+        model.addAttribute("authUser",object);
+        if (object != null && object.getClass().getName().contains("Hospital")){
+            model.addAttribute("isHospitalLogged",true);
+        }
         return "hospital";
     }
 
@@ -55,18 +59,31 @@ public class HospitalController {
         model.addAttribute("isEmployee",true);
         model.addAttribute("hospital",hospital);
         model.addAttribute("hospitalEmployees",hospitalEmployeeService.getEmployeesByHospital(hospital));
+        Object object = userService.findLoggedInUsername();
+        model.addAttribute("authUser",object);
+        System.out.println(object.getClass().getName());
+        if (object != null && object.getClass().getName().contains("Hospital")){
+            model.addAttribute("isHospitalLogged",true);
+        }
         return "hospital";
     }
+
     @GetMapping(value = "/hospital/{id}/appointment")
+    @PreAuthorize("hasRole('ROLE_ANONYMOUS') or (hasAuthority('USER')) && (not hasAuthority('ROLE_HOSPITAL'))")
     public String hospitalAppointment(Model model,@PathVariable(name = "id") Long id){
         model.addAttribute("isAppointment",true);
         model.addAttribute("appointment",new AppointmentIn());
         model.addAttribute("hospital",hospitalService.getHospitalById(id));
+        Object object = userService.findLoggedInUsername();
+        model.addAttribute("authUser",object);
+        if (object != null && object.getClass().getName().contains("Hospital")){
+           model.addAttribute("isHospitalLogged",true);
+        }
         return "hospital";
     }
 
     @PostMapping(value = "/hospital/{id}/appointment")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasRole('USER') or hasRole('ROLE_ANONYMOUS')")
     public String makeHospitalAppointment(@ModelAttribute("appointment")AppointmentIn appointment,
                                           BindingResult bindingResult,
                                           @RequestParam(name = "diagnosis")String diagnosis,
@@ -92,12 +109,18 @@ public class HospitalController {
     }
 
     @GetMapping(value = "/hospital-appointments")
-    public String hospitalAppointments(){
+    public String hospitalAppointments(Model model){
+        Object authUser = userService.findLoggedInUsername();
+        model.addAttribute("authUser",authUser);
         return "hospital-appointments";
     }
 
     @GetMapping(value = "/hospital-profile")
-    public String hospitalProfile(){
+    public String hospitalProfile(Model model){
+        Hospital hospital = hospitalService.findLoggedInHospital();
+        model.addAttribute("authUser",hospital);
+        model.addAttribute("hospital",hospital);
+        model.addAttribute("hospitalEmployees",hospitalEmployeeService.getEmployeesByHospital(hospital));
         return "hospital-profile";
     }
 }

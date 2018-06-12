@@ -50,11 +50,9 @@ public class HospitalAppointmentService {
             e.printStackTrace();
         }
 
-
         Diagnosis diagnosis = diagnosisService.getOneByName(appointmentIn.getDiagnosis());
         Hospital hospital = hospitalService.getHospitalById(hospitalId);
-        User user = userService.findLoggedInUsername();
-        System.out.println(user);
+        User user = (User) userService.findLoggedInUsername();
         HospitalAppointment hospitalAppointment = hospitalAppointmentRepository.save(new HospitalAppointment(hospital,user,true,desiredDate,diagnosis));
         logger.info("Creating appointment successfully: {}" + hospitalAppointment);
     }

@@ -23,8 +23,6 @@ import java.security.Principal;
 
 @Controller
 public class UserController  {
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     public JavaMailSender emailSender;
@@ -81,15 +79,15 @@ public class UserController  {
 
     @GetMapping(value = "/user-profile")
     public String userProfile(Model model){
-        User authUser = userService.findLoggedInUsername();
-        model.addAttribute("user",authUser);
+        User authUser = (User) userService.findLoggedInUsername();
+        model.addAttribute("user", authUser);
         return "user-profile";
     }
 
     @GetMapping(value = "/user-appointments")
     public String userAppointments(Model model){
-        User authUser = userService.findLoggedInUsername();
-        model.addAttribute("user",authUser);
+        User authUser = (User) userService.findLoggedInUsername();
+        model.addAttribute("user", authUser);
         return "user-appointments";
     }
 }

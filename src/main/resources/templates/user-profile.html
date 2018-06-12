@@ -42,7 +42,7 @@
 </head>
 
 <body class="pace-on pace-counter">
-<div th:replace="layouts/header"></div>
+<div th:replace="layouts/header" th:with="authUser"></div>
 
 <div id="content" role="main">
     <article>
@@ -245,6 +245,7 @@
         format: 'yyyy-MM-dd HH:mm'
     });
 </script>
+<div th:replace="layouts/support"></div>
 </body>
 
 </html>
