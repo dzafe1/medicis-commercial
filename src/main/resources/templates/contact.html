@@ -26,7 +26,7 @@
     <link rel="shortcut icon" th:href="@{images/favicons/favicon.ico}"> </head>
 
 <body class="pace-on pace-counter">
-<div th:replace="layouts/header"> </div>
+<div th:replace="layouts/header" th:with="authUser,isHospitalLogged"></div>
 
 <div id="content" role="main">
     <article>
@@ -49,7 +49,53 @@
                 <div class="row">
                     <div class="col-md-12 text-center small-screen-center col-border-bottom">
                         <div class="row">
-
+                            <div class="col-md-6 text-center small-screen-center">
+                                <div class="divider-wrapper">
+                                    <div class="visible-xs element-height-80"></div>
+                                    <div class="visible-sm element-height-80"></div>
+                                    <div class="visible-md element-height-80"></div>
+                                    <div class="visible-lg element-height-80"></div>
+                                </div>
+                                <form id="contactForm" action="contact_mailer.php" class="contact-form">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group form-icon-group"> <i class="fa fa-user"></i>
+                                                <input class="form-control" id="name" name="name" placeholder="Your name *" type="text" required=""> </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-icon-group"> <i class="fa fa-envelope"></i>
+                                                <input class="form-control" id="email" name="email" placeholder="Your email *" type="email" required=""> </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-icon-group"> <i class="fa fa-pencil"></i>
+                                        <textarea class="form-control" id="message" name="message" placeholder="Your message" rows="10" required=""></textarea>
+                                    </div>
+                                    <div class="text-center">
+                                        <input type="submit" value="Send email" class="btn btn-primary"> </div>
+                                    <div class="messages text-center"></div>
+                                </form>
+                                <div class="divider-wrapper">
+                                    <div class="visible-xs element-height-80"></div>
+                                    <div class="visible-sm element-height-80"></div>
+                                    <div class="visible-md element-height-80"></div>
+                                    <div class="visible-lg element-height-80"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-center small-screen-center">
+                                <div class="divider-wrapper">
+                                    <div class="visible-xs element-height-80"></div>
+                                    <div class="visible-sm element-height-80"></div>
+                                    <div class="visible-md element-height-80"></div>
+                                    <div class="visible-lg element-height-80"></div>
+                                </div>
+                                <div class="google-map element-top-0 element-bottom-0" id="map" style="height:355px"></div>
+                                <div class="divider-wrapper">
+                                    <div class="visible-xs element-height-30"></div>
+                                    <div class="visible-sm element-height-30"></div>
+                                    <div class="visible-md element-height-30"></div>
+                                    <div class="visible-lg element-height-30"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,25 +105,25 @@
     <div th:replace="layouts/footer"> </div>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 </div>
-<script type="text/javascript">
-    var oxyThemeData = {
-        navbarHeight: 100,
-        navbarScrolled: 90,
-        navbarScrolledPoint: 20,
-        menuClose: 'off',
-        scrollFinishedMessage: 'No more items to load.',
-        hoverMenu:
-            {
-                hoverActive: false,
-                hoverDelay: 1,
-                hoverFadeDelay: 200
-            },
-        siteLoader: 'on'
-    };
-</script>
 <script th:src="@{js/theme.js}"></script>
 <!-- load contact form js -->
 <script th:src="@{js/contact.min.js}"></script>
+
+<script>
+    window.map = {
+        map_type: 'ROADMAP',
+        map_zoom: 15,
+        map_style: 'blackwhite',
+        map_scrollable: 'on',
+        marker: 'show',
+        label: ['London Royal', 'Athens Bistro'],
+        address: '',
+        latlng: ['51.511084, -0.133202', '51.506623, -0.111916'],
+        center_latlng: '',
+        markerURL: 'images/marker.png',
+        auto_center: true,
+    };
+</script>
 <!-- load map js -->
 <script th:src="@{js/map.min.js}"></script>
 <div th:replace="layouts/support"></div>

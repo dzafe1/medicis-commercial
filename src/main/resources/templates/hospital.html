@@ -31,7 +31,7 @@
     <link rel="shortcut icon" th:href="@{/images/favicons/favicon.ico}">
 </head>
 <body class="pace-on pace-counter">
-<div th:replace="layouts/header" th:with="authUser"></div>
+<div th:replace="layouts/header" th:with="authUser,isHospitalLogged"></div>
 <div id="content" role="main">
     <article>
         <section class="section">
@@ -65,7 +65,7 @@
                             <li class="">
                                 <a th:href="@{/hospital/} + ${hospital.id } + @{/employees} ">Employees</a>
                             </li>
-                            <li th:if="${isHospitalLogged} == null" class="">
+                            <li th:if="${isHospitalLogged} == false" class="">
                                 <a  th:href="@{/hospital/} + ${hospital.id } + @{/appointment}">Send request for
                                     appointment</a>
                             </li>
@@ -235,7 +235,7 @@
                             <li class="active">
                                 <a th:href="@{/hospital/} + ${hospital.id } + @{/employees} ">Employees</a>
                             </li>
-                            <li th:if="${isHospitalLogged} == null" class="">
+                            <li th:if="${isHospitalLogged} == false" class="">
                                 <a th:href="@{/hospital/} + ${hospital.id } + @{/appointment}">Send request for
                                     appointment</a>
                             </li>
@@ -354,7 +354,7 @@
                             <li class="">
                                 <a th:href="@{/hospital/} + ${hospital.id } + @{/employees} ">Employees</a>
                             </li>
-                            <li th:if="${isHospitalLogged} == null" class="active">
+                            <li th:if="${isHospitalLogged} == false" class="active">
                                 <a th:href="@{/hospital/} + ${hospital.id } + @{/appointment}">Send request for
                                     appointment</a>
                             </li>
@@ -471,7 +471,6 @@
 
 <script th:src="@{/js/theme.min.js}"></script>
 <script th:src="@{/js/revolution.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
 <script th:src="@{/js/jquery.easy-autocomplete.min.js}"></script>
 <script src="https://cdn.rawgit.com/leafo/sticky-kit/v1.1.2/jquery.sticky-kit.min.js"></script>

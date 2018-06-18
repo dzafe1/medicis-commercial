@@ -81,6 +81,12 @@ public class UserController  {
     public String userProfile(Model model){
         User authUser = (User) userService.findLoggedInUsername();
         model.addAttribute("user", authUser);
+        model.addAttribute("authUser",authUser);
+        if (authUser != null && authUser.getClass().getName().contains("Hospital")){
+            model.addAttribute("isHospitalLogged",true);
+        }else {
+            model.addAttribute("isHospitalLogged",false);
+        }
         return "user-profile";
     }
 
@@ -88,6 +94,12 @@ public class UserController  {
     public String userAppointments(Model model){
         User authUser = (User) userService.findLoggedInUsername();
         model.addAttribute("user", authUser);
+        model.addAttribute("authUser",authUser);
+        if (authUser != null && authUser.getClass().getName().contains("Hospital")){
+            model.addAttribute("isHospitalLogged",true);
+        }else {
+            model.addAttribute("isHospitalLogged",false);
+        }
         return "user-appointments";
     }
 }

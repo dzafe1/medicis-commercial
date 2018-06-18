@@ -39,6 +39,11 @@ public class HospitalController {
         model.addAttribute("hospitals",hospitalService.getAllHospitals());
         Object authUser = userService.findLoggedInUsername();
         model.addAttribute("authUser",authUser);
+        if (authUser != null && authUser.getClass().getName().contains("Hospital")){
+            model.addAttribute("isHospitalLogged",true);
+        }else {
+            model.addAttribute("isHospitalLogged",false);
+        }
         return "hospitals";
     }
     @GetMapping(value = "/hospital/{id}")
@@ -49,6 +54,9 @@ public class HospitalController {
         model.addAttribute("authUser",object);
         if (object != null && object.getClass().getName().contains("Hospital")){
             model.addAttribute("isHospitalLogged",true);
+        }else {
+            System.out.println("tu sam");
+            model.addAttribute("isHospitalLogged",false);
         }
         return "hospital";
     }
@@ -61,9 +69,10 @@ public class HospitalController {
         model.addAttribute("hospitalEmployees",hospitalEmployeeService.getEmployeesByHospital(hospital));
         Object object = userService.findLoggedInUsername();
         model.addAttribute("authUser",object);
-        System.out.println(object.getClass().getName());
         if (object != null && object.getClass().getName().contains("Hospital")){
             model.addAttribute("isHospitalLogged",true);
+        }else {
+            model.addAttribute("isHospitalLogged",false);
         }
         return "hospital";
     }
@@ -77,7 +86,9 @@ public class HospitalController {
         Object object = userService.findLoggedInUsername();
         model.addAttribute("authUser",object);
         if (object != null && object.getClass().getName().contains("Hospital")){
-           model.addAttribute("isHospitalLogged",true);
+            model.addAttribute("isHospitalLogged",true);
+        }else {
+            model.addAttribute("isHospitalLogged",false);
         }
         return "hospital";
     }
@@ -112,6 +123,11 @@ public class HospitalController {
     public String hospitalAppointments(Model model){
         Object authUser = userService.findLoggedInUsername();
         model.addAttribute("authUser",authUser);
+        if (authUser != null && authUser.getClass().getName().contains("Hospital")){
+            model.addAttribute("isHospitalLogged",true);
+        }else {
+            model.addAttribute("isHospitalLogged",false);
+        }
         return "hospital-appointments";
     }
 
@@ -121,6 +137,11 @@ public class HospitalController {
         model.addAttribute("authUser",hospital);
         model.addAttribute("hospital",hospital);
         model.addAttribute("hospitalEmployees",hospitalEmployeeService.getEmployeesByHospital(hospital));
+        if (hospital != null){
+            model.addAttribute("isHospitalLogged",true);
+        }else {
+            model.addAttribute("isHospitalLogged",false);
+        }
         return "hospital-profile";
     }
 }

@@ -19,20 +19,26 @@
             <nav class="collapse navbar-collapse main-navbar logo-navbar navbar-right">
                 <div class="menu-container">
                     <ul class="nav navbar-nav" id="menu-home">
-                        <li class="active "> <a th:href="@{/}">Home</a> </li>
-                        <li class=" "> <a th:href="@{/hospitals}">Hospitals</a> </li>
+                        <li id="home" class="active "> <a th:href="@{/}">Home</a> </li>
+                        <li id="hospitals"  class=" "> <a th:href="@{/hospitals}">Hospitals</a> </li>
                         <li class=" "> <a th:href="@{/about}">About Us</a> </li>
-                        <li class=" "> <a th:href="@{/contact}">Contact</a> </li>
-                        <li class="dropdown-toggle"  data-toggle="dropdown">
-                            <a href="#">Contact</a> <span class="caret"></span>
+                        <li id="contact" class=" "> <a th:href="@{/contact}">Contact</a> </li>
+                        <li id="login_register" th:if="${authUser == null}" class=" "> <a th:href="@{/login-register}"><i class="fa fa-user"></i></a> </li>
+                        <th:block th:if="${authUser != null}">
+                        <li id="profile_section" class="dropdown">
+                            <a class="dropdown-toggle"  data-toggle="dropdown" href="#">Profile Section <span class="fa fa-caret-down"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">HTML</a></li>
-                                <li><a href="#">CSS</a></li>
-                                <li><a href="#">JavaScript</a></li>
+                                <th:block th:if="${isHospitalLogged == true}">
+                                    <li><a th:href="@{/hospital-profile}">Edit hospital's profile</a></li>
+                                    <li><a th:href="@{/hospital-appointments}">Overview appointments</a></li>
+                                </th:block>
+                                <th:block th:if="${isHospitalLogged == false}">
+                                    <li><a th:href="@{/user-profile}">Edit your profile</a></li>
+                                    <li><a th:href="@{/user-appointments}">Overview appointments</a></li>
+                                </th:block>
                             </ul>
                         </li>
-                        <li th:if="${authUser == null}" class=" "> <a th:href="@{/login-register}"><i class="fa fa-user"></i></a> </li>
-                        <li th:if="${authUser != null}" class=" "> <a onclick="logout()"><i class="fa fa-sign-out"></i></a> </li>
+                        <li class=" "> <a onclick="logout()"><i class="fa fa-sign-out"></i></a> </li>
                         <form th:id="logoutForm" th:action="@{/logout}" method="POST">
                         </form>
                         <script>
@@ -40,6 +46,7 @@
                                 document.getElementById("logoutForm").submit();
                             }
                         </script>
+                        </th:block>
                     </ul>
                 </div>
                 <div class="menu-sidebar">
@@ -59,6 +66,39 @@
     </div>
 </div>
 <a class="go-top go-top-circle" href="javascript:void(0)"> <i class="fa fa-angle-up"></i> </a>
+    <script>
+        var url = window.location.href;
+        console.log(url)
+        var previous;
+        var hospitals = url.indexOf("hospital");
+        var contact = url.indexOf("/contact");
+        var login_register = url.indexOf("login-register");
+
+        if( hospitals !== -1 ){
+            previous=document.getElementsByClassName('active');
+            previous[0].classList.remove('active');
+            document.getElementById('hospitals').classList.add('active');
+        }
+        if( contact !== -1 ){
+            previous=document.getElementsByClassName('active');
+            previous[0].classList.remove('active');
+            document.getElementById('contact').classList.add('active');
+        }
+        if  (login_register !== -1 ){
+            previous=document.getElementsByClassName('active');
+            previous[0].classList.remove('active');
+            document.getElementById('login_register').classList.add('active');
+        }
+        if (url.indexOf("/user-profile") !== -1 || url.indexOf("appointments") !== -1 || url.indexOf("hospital-profile") !== -1){
+            console.log("eo me2");
+            previous=document.getElementsByClassName('active');
+            previous[0].classList.remove('active');
+            document.getElementById('profile_section').classList.add('active');
+        }
+
+
+
+    </script>
 </div>
 </body>
 </html>

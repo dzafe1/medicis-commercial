@@ -28,7 +28,7 @@
 </head>
 
 <body class="pace-on pace-counter">
-<div th:replace="layouts/header" th:with="authUser"></div>
+<div th:replace="layouts/header" th:with="authUser,isHospitalLogged"></div>
 <div id="content" role="main">
     <article>
         <section class="section" id="home">
@@ -76,7 +76,7 @@
                                              data-splitin="none" data-splitout="none" data-start="900"
                                              data-voffset="-15" data-x="center" data-y="center"
                                              style="z-index: 7; max-width: auto; max-height: auto; white-space: nowrap;">
-                                            WELCOME TO HEALTH BOOK
+                                            WELCOME TO MEDICS
                                         </div>
                                         <!-- LAYER NR. 4 -->
                                         <div class="tp-caption medicalcenter sft tp-resizeme rs-parallaxlevel-0"
@@ -573,8 +573,8 @@
         siteLoader: 'on'
     };
 </script>
-<script th:src="@{js/theme.min.js}"></script>
-<script th:src="@{js/revolution.min.js}"></script>
+<script th:src="@{/js/theme.min.js}"></script>
+<script th:src="@{/js/revolution.min.js}"></script>
 <script type="text/javascript">
     jQuery(document).ready(function () {
         jQuery('.tp-banner').show().revolution(
