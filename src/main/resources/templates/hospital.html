@@ -343,7 +343,7 @@
             <div class="container" id="infoContainer">
                 <div class="row">
                     <br>
-                    <div class="alert alert-info z-depth-1 text-center">
+                    <div  th:if="${appointmentCreated} != null"  class="alert alert-info z-depth-1 text-center">
                         Appointment created. Our staff will contact you soon.
                     </div>
                     <div class="col-md-8 text-center">

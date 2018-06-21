@@ -38,7 +38,7 @@ public class CommercialApplication {
 			this.hospitalsImagesRepository = hospitalsImagesRepository;
 
 		}
-
+/*TODO dodaj appointment za usere*/
 		@Override
 		public void run(ApplicationArguments args) {
 			BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();

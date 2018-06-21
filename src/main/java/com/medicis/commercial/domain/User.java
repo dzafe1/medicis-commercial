@@ -1,6 +1,7 @@
 package com.medicis.commercial.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.internal.Nullable;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -8,6 +9,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -47,12 +50,17 @@ public class User implements Serializable {
     @Size(min=2, max=30,message = "Email must be greater then 2 characters")
     private String email;
 
-    @Column
-    @Pattern(regexp = "^(?:\\+\\d{1,3}|0\\d{1,3}|00\\d{1,2})?(?:\\s?\\(\\d+\\))?(?:[-\\/\\s.]|\\d)+$", message="Invalid phone number!")
+    /*TODO moras dodati pravi broj,odnosno validaciju*/
+    @Column(columnDefinition="varchar(25)")
+    //@Pattern(regexp = "^(?:\\+\\d{1,3}|0\\d{1,3}|00\\d{1,2})?(?:\\s?\\(\\d+\\))?(?:[-\\/\\s.]|\\d)+$", message="Invalid phone number!")
     private String phoneNumber;
 
     @Column
-    private Boolean verifiedPhoneNumber;
+    private String phoneToken;
+
+    @NotNull
+    @Column(columnDefinition="TINYINT(1) default 0")
+    private Boolean verifiedPhoneNumber=false;
 
     @Column(nullable = false)
     @Size(min=6, max=255,message = "Minimum 6 length!")
@@ -105,6 +113,7 @@ public class User implements Serializable {
         this.imgPath = imgPath;
         this.active = active;
         this.role=role;
+        this.phoneNumber="Phone number";
     }
 
     public User(String fName, String lName, String gender, String email, String password, String role){
@@ -234,6 +243,14 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getPhoneToken() {
+        return phoneToken;
+    }
+
+    public void setPhoneToken(String phoneToken) {
+        this.phoneToken = phoneToken;
+    }
+
     public Boolean getVerifiedPhoneNumber() {
         return verifiedPhoneNumber;
     }
@@ -252,6 +269,7 @@ public class User implements Serializable {
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", phoneToken='" + phoneToken + '\'' +
                 ", verifiedPhoneNumber=" + verifiedPhoneNumber +
                 ", password='" + password + '\'' +
                 ", repeatPassword='" + repeatPassword + '\'' +

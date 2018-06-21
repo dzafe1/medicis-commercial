@@ -8,18 +8,23 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.rest.api.v2010.account.MessageCreator;
 import com.twilio.type.PhoneNumber;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class UserController  {
@@ -30,15 +35,18 @@ public class UserController  {
     @Autowired
     public UserService userService;
 
-    private final static String ACCOUNT_SID = "ACc5a04797cedd4b225d4a09cf9f60cbdc";
-    private final static String AUTH_TOKEN = "fd7cbe137ceb89960e591bc0e05e4ed3";
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.registerCustomEditor(       Date.class,
+                new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true, 10));
+    }
 
     @GetMapping(value = "/login-register")
     public String loginRegister(Model model){
         model.addAttribute("user",new User());
         return "login-register";
     }
-    @GetMapping(value = "/test")
+   /* @GetMapping(value = "/test")
     public void sms(){
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
@@ -48,7 +56,7 @@ public class UserController  {
                 new PhoneNumber("+14159681251"),// From number
                 "Sto se ne javi nikad"                    // SMS body
         ).create();
-    }
+    }*/
 
     @PostMapping(value = "/register")
     public String register(@Valid User user, BindingResult bindingResult,
@@ -57,8 +65,7 @@ public class UserController  {
                            @RequestParam("gender")String gender,
                            @RequestParam("email")String email,
                            @RequestParam("password")String password,
-                           @RequestParam("repeat_password")String repeat_password,
-                           RedirectAttributes redirectAttributes){
+                           @RequestParam("repeat_password")String repeat_password){
         if (bindingResult.hasErrors()) {
             return "login-register";
         }else {
@@ -88,6 +95,20 @@ public class UserController  {
             model.addAttribute("isHospitalLogged",false);
         }
         return "user-profile";
+    }
+
+    /*TODO here i have security issue where user could change id in hidden field*/
+    @PostMapping(value = "/user-profile")
+    public String editUserProfile(User user,
+                                  RedirectAttributes redirectAttributes){
+
+            if (!userService.editUserProfile(user)){
+                redirectAttributes.addFlashAttribute("failure",true);
+                return "user-profile";
+
+            }
+            redirectAttributes.addFlashAttribute("userUpdated",true);
+            return "redirect:/user-profile";
     }
 
     @GetMapping(value = "/user-appointments")

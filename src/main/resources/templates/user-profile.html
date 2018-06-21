@@ -70,6 +70,9 @@
                     <div class="col-md-12 text-center small-screen-center col-border-bottom">
                         <div class="row">
                             <div class="col-md-6 text-center small-screen-center">
+                                <div  th:if="${userUpdated} != null"  class="alert alert-info z-depth-1 text-center">
+                                    User profile updated successfully!
+                                </div>
                                 <div class="divider-wrapper">
                                     <div class="visible-xs element-height-80"></div>
                                     <div class="visible-sm element-height-80"></div>
@@ -78,6 +81,8 @@
                                 </div>
                                 <form id="user_profile" th:object="${user}" th:action="@{/user-profile}"
                                       th:method="post" class="contact-form form-horizontal">
+                                    <input type="hidden" th:field="*{id}">
+                                    <input type="hidden" th:field="*{verifiedPhoneNumber}">
                                     <div class="row">
                                         <div class="col-md-10">
                                             <div class="form-group form-icon-group"><i class="fa fa-user"></i>
@@ -88,13 +93,7 @@
                                         <div class="col-md-10">
                                             <div class="form-group form-icon-group"><i class="fa fa-user"></i>
                                                 <input class="form-control" th:field="*{lName}"
-                                                       placeholder="Your last name *" type="text" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="form-group form-icon-group"><i class="fa fa-at"></i>
-                                                <input class="form-control" th:field="*{email}" name="email"
-                                                       placeholder="Your email *" type="text" required="">
+                                                       placeholder="Your last name *" type="text">
                                             </div>
                                         </div>
                                         <div class="col-md-10">
@@ -102,17 +101,17 @@
                                                 to the hospitals that you asked for appointment</label>
                                             <div class="form-group form-icon-group"><i class="fa fa-phone"></i>
                                                 <input class="form-control" th:field="*{phoneNumber}"
-                                                       placeholder="Your phone number *" type="text" required="">
+                                                       placeholder="Your phone number *" type="text">
                                             </div>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="form-group">
                                                 <label>Change your gender:</label>
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="optradio">Male
+                                                    <input th:value="${'M'}" th:field="*{gender}" type="radio" name="optradio">Male
                                                 </label>
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="optradio">Female
+                                                    <input th:value="${'F'}" th:field="*{gender}" type="radio" name="optradio">Female
                                                 </label>
                                             </div>
                                         </div>
@@ -120,28 +119,29 @@
                                             <div class="form-group">
                                                 <label for="dtp_input1" class="col-md-4 control-label">Select date of
                                                     birth</label>
-                                                <div class="input-group date form_datetime col-md-5"
-                                                     data-date-format="dd MM yyyy - HH:ii p"
-                                                     data-link-field="dtp_input1">
-                                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                                <div class="input-group date form_date col-md-5"
+                                                     data-date-format="dd mm yyyy" data-date=""
+                                                     data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+                                                    <input class="form-control" size="16" type="text" th:value="${user.dob != null} ? ${#dates.format(user.dob, 'yyyy-MM-dd')}" readonly>
                                                     <span class="input-group-addon"><span
-                                                            class="glyphicon glyphicon-th"></span></span>
+                                                            class="glyphicon glyphicon-calendar"></span></span>
                                                 </div>
                                                 <input id="dtp_input1" type="text" th:field="*{dob}" hidden/><br/>
                                                 <span th:if="${#fields.hasErrors('dob')}" class="validation"
                                                       th:errors="*{dob}">Name Error</span>
                                             </div>
+
                                         </div>
                                         <div class="col-md-10">
                                             <div class="form-group form-icon-group"><i class="fa fa-key"></i>
                                                 <input class="form-control" id="password" th:field="*{password}"
-                                                       placeholder="Your password *" type="password" required="">
+                                                       placeholder="Your password *" type="password">
                                             </div>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="form-group form-icon-group"><i class="fa fa-key"></i>
-                                                <input class="form-control" th:field="*{password}"
-                                                       placeholder="Repeat your password *" type="password" required="">
+                                                <input class="form-control"
+                                                       placeholder="Repeat your password *" type="password">
                                             </div>
                                         </div>
                                     </div>
@@ -192,7 +192,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Date of birth</td>
-                                                <td th:text="${user.dob}"></td>
+                                                <td th:text="${user.dob != null} ? ${#dates.format(user.dob, 'yyyy-MM-dd')}"></td>
                                             </tr>
                                             <tr>
                                                 <td>Phone Number</td>
@@ -234,16 +234,28 @@
 <script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
 <script th:src="@{js/map.min.js}"></script>
 <script>
-    $('.form_datetime').datetimepicker({
+    $('.form_date').datetimepicker({
         weekStart: 1,
         todayBtn: 1,
         autoclose: 1,
         todayHighlight: 1,
         startView: 2,
         forceParse: 0,
-        showMeridian: 1,
-        format: 'yyyy-MM-dd HH:mm'
+        minView: 2,
+        format: 'yyyy-mm-dd'
     });
+   /* $('.form_date').datetimepicker({
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });*/
+    function funkcija2() {
+        document.getElementById('user_profile').submit();
+    }
 </script>
 <div th:replace="layouts/support"></div>
 </body>
