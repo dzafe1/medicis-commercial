@@ -1,3 +1,5 @@
+
+
 package com.medicis.commercial.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -257,4 +259,5 @@ public class Hospital implements Serializable {
                 ", active=" + active +
                 '}';
     }
+
 }

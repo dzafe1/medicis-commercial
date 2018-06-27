@@ -1,6 +1,5 @@
 package com.medicis.commercial.controllers;
 
-
 import com.medicis.commercial.domain.Hospital;
 import com.medicis.commercial.domain.In.AppointmentIn;
 import com.medicis.commercial.service.HospitalAppointmentService;
@@ -16,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -55,7 +56,6 @@ public class HospitalController {
         if (object != null && object.getClass().getName().contains("Hospital")){
             model.addAttribute("isHospitalLogged",true);
         }else {
-            System.out.println("tu sam");
             model.addAttribute("isHospitalLogged",false);
         }
         return "hospital";
@@ -94,7 +94,7 @@ public class HospitalController {
     }
 
     @PostMapping(value = "/hospital/{id}/appointment")
-    @PreAuthorize("hasRole('USER') or hasRole('ROLE_ANONYMOUS')")
+    @PreAuthorize("hasAuthority('USER') && (not hasAuthority('ROLE_HOSPITAL'))")
     public String makeHospitalAppointment(@ModelAttribute("appointment")AppointmentIn appointment,
                                           BindingResult bindingResult,
                                           @RequestParam(name = "diagnosis")String diagnosis,
@@ -144,4 +144,43 @@ public class HospitalController {
         }
         return "hospital-profile";
     }
+    @GetMapping(value = "/hospital-profile/basic-edit")
+    public String editHospitalProfileRedirect(){
+        return "redirect:/hospital-profile";
+    }
+    @PostMapping(value = "/hospital-profile/basic-edit")
+    public String editHospitalProfile(Hospital hospital,RedirectAttributes redirectAttributes){
+        if (!hospitalService.editHospitalProfile(hospital)){
+            redirectAttributes.addFlashAttribute("failure",true);
+            return "hospital-profile";
+
+        }
+        redirectAttributes.addFlashAttribute("hospitalUpdated",true);
+        return "redirect:/hospital-profile";
+    }
+    @GetMapping(value = "/hospital-profile/edit-password")
+    public String editHospitalPasswordRedirect(){
+        System.out.println("dzafa");
+        return "redirect:/hospital-profile";
+    }
+    @PostMapping(value = "/hospital-profile/edit-password")
+    public String editHospitalPassword(@RequestParam("currentPassword") String currentPassword,
+                                       @RequestParam("newPassword") String newPassword,
+                                       @RequestParam("repeatPassword") String repeatPassword,
+                                       RedirectAttributes redirectAttributes){
+
+        Map<String,String> passwords = new HashMap<>();
+        passwords.put("currentPassword",currentPassword);
+        passwords.put("newPassword",newPassword);
+        passwords.put("repeatPassword",repeatPassword);
+        if (!hospitalService.changePassword(passwords)){
+            redirectAttributes.addFlashAttribute("passwordFailure",true);
+            return "redirect:/hospital-profile";
+
+        }
+        redirectAttributes.addFlashAttribute("hospitalUpdated",true);
+        return "redirect:/hospital-profile";
+    }
+
+
 }

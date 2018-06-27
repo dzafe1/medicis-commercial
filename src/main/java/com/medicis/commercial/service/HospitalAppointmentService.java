@@ -56,4 +56,7 @@ public class HospitalAppointmentService {
         HospitalAppointment hospitalAppointment = hospitalAppointmentRepository.save(new HospitalAppointment(hospital,user,true,desiredDate,diagnosis));
         logger.info("Creating appointment successfully: {}" + hospitalAppointment);
     }
+    public List<HospitalAppointment> getAppointmentsByUser(User user){
+        return hospitalAppointmentRepository.findAllByUser(user);
+    }
 }

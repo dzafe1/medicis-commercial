@@ -2,6 +2,7 @@ package com.medicis.commercial.controllers;
 
 import com.medicis.commercial.domain.User;
 import com.medicis.commercial.repository.UserRepository;
+import com.medicis.commercial.service.HospitalAppointmentService;
 import com.medicis.commercial.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.twilio.Twilio;
@@ -34,6 +35,9 @@ public class UserController  {
 
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public HospitalAppointmentService hospitalAppointmentService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder){
@@ -116,6 +120,7 @@ public class UserController  {
         User authUser = (User) userService.findLoggedInUsername();
         model.addAttribute("user", authUser);
         model.addAttribute("authUser",authUser);
+        model.addAttribute("userAppointments",hospitalAppointmentService.getAppointmentsByUser(authUser));
         if (authUser != null && authUser.getClass().getName().contains("Hospital")){
             model.addAttribute("isHospitalLogged",true);
         }else {

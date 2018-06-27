@@ -18,7 +18,6 @@ public class HomeController {
         Object authUser = userService.findLoggedInUsername();
         model.addAttribute("authUser",authUser);
         if (authUser != null && authUser.getClass().getName().contains("Hospital")){
-            System.out.println("tu sam");
             model.addAttribute("isHospitalLogged",true);
         }else {
             model.addAttribute("isHospitalLogged",false);

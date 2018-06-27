@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <title> User profile | Medical</title>
+    <title> User appointments | Medical</title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link href="//fonts.googleapis.com/css?family=Roboto%7CRoboto+Condensed:300,400%7CGentium+Basic:400italic&amp;subset=latin,latin,latin"
           rel="stylesheet" type="text/css">
@@ -81,42 +81,14 @@
                                         <th>Diagnosis</th>
                                         </thead>
                                         <tbody>
+                                        <th:block th:each="appointment : ${userAppointments}">
                                         <tr>
-                                            <td>1</td>
-                                            <td>Kosevo </td>
-                                            <td>21.1.2017.</td>
-                                            <td>Nesto</td>
+                                            <td th:text="${appointment.id}"></td>
+                                            <td th:text="${appointment.hospital.fullName}"> </td>
+                                            <td th:text="${appointment.dateOfAppointment != null} ? ${#dates.format(appointment.dateOfAppointment, 'yyyy-MM-dd HH:mm')}"></td>
+                                            <td th:text="${appointment.diagnosis.diagnosis}"></td>
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Kosevo </td>
-                                            <td>21.1.2017.</td>
-                                            <td>Nesto</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Kosevo </td>
-                                            <td>21.1.2017.</td>
-                                            <td>Nesto</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Kosevo </td>
-                                            <td>21.1.2017.</td>
-                                            <td>Nesto</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Kosevo </td>
-                                            <td>21.1.2017.</td>
-                                            <td>Nesto</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Kosevo </td>
-                                            <td>21.1.2017.</td>
-                                            <td>Nesto</td>
-                                        </tr>
+                                        </th:block>
                                         </tbody>
                                     </table>
                                     <div class="clearfix"></div>

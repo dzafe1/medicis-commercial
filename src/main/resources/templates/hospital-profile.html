@@ -126,19 +126,22 @@
                             <div class="col-md-12">
                                 <div class="card card-dep">
                                     <h1 class="title" th:text="${'Edit general information''s '}"></h1>
-                                    <form class="form-horizontal" id="editHospital" th:object="${hospital}">
+                                    <form class="form-horizontal" id="editHospital" th:action="@{/hospital-profile/basic-edit}"
+                                          th:object="${hospital}" method="post">
+                                        <input type="hidden" th:field="*{id}">
+                                        <div  th:if="${failure} != null"  class="alert alert-warning z-depth-1 text-center">
+                                            Error happened!
+                                        </div>
+                                        <div  th:if="${hospitalUpdated} != null"  class="alert alert-info z-depth-1 text-center">
+                                            Hospital profile updated successfully!
+                                        </div>
                                         <div class="col-md-6 col-md-offset-3">
                                             <div class="form-group">
                                                 <label for="fullName">Full Name</label>
                                                 <input id="fullName" class="form-control" th:field="*{fullName}">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-md-offset-3">
-                                            <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input id="email" class="form-control" th:field="*{email}">
-                                            </div>
-                                        </div>
+
                                         <div class="col-md-6 col-md-offset-3">
                                             <div class="form-group">
                                                 <label for="address">Address</label>
@@ -174,7 +177,7 @@
                                         <div class="col-md-8 col-md-offset-2">
                                             <div class="form-group">
                                                 <label for="about">About Hospital</label>
-                                                <textarea id="about" class="form-control" rows="8"
+                                                <textarea th:field="*{aboutHospital}" id="about" class="form-control" rows="8"
                                                           th:text="${hospital.aboutHospital}"></textarea>
                                             </div>
                                         </div>
@@ -195,23 +198,27 @@
                             <div class="col-md-12">
                                 <h1 class="title">Password part</h1>
                                 <div class="card card-dep" style="padding-top: 1em;">
-                                    <form class="form-horizontal" id="changePassword">
+                                    <form class="form-horizontal" method="post"
+                                          id="changePassword"  th:action="@{/hospital-profile/edit-password}">
+                                        <div  th:if="${passwordFailure} != null"  class="alert alert-warning z-depth-1 text-center">
+                                           Please check your passwords!
+                                        </div>
                                         <div class="col-md-6 col-md-offset-3">
                                             <div class="form-group">
                                                 <label for="currentPassword">Current password</label>
-                                                <input id="currentPassword" type="text" class="form-control">
+                                                <input id="currentPassword"  th:name="currentPassword" type="password" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-md-offset-3">
                                             <div class="form-group">
                                                 <label for="password">New password</label>
-                                                <input id="password" type="text" class="form-control">
+                                                <input id="password" th:name="newPassword" type="password" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-md-offset-3">
                                             <div class="form-group">
                                                 <label for="repeat_password">Repeat password</label>
-                                                <input id="repeat_password" type="text" class="form-control">
+                                                <input id="repeat_password" th:name="repeatPassword" type="password" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-md-offset-3">
