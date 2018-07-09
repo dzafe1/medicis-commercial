@@ -20,4 +20,10 @@ public interface HospitalRepository extends JpaRepository<Hospital,Long> {
     Long getHospitalsCount();
 
     Hospital findOneByEmail(String email);
+
+    List<Hospital> getAllByCountry(String country);
+
+    List<Hospital> getAllByCity(String city);
+
+    List<Hospital> getAllByCityAndCountry(String city, String country);
 }

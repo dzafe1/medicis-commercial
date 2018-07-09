@@ -128,4 +128,39 @@ public class UserController  {
         }
         return "user-appointments";
     }
+
+    @GetMapping("/verify-phone")
+    public String verifyPhone(Model model){
+        User authUser = (User) userService.findLoggedInUsername();
+        model.addAttribute("user", authUser);
+        model.addAttribute("authUser",authUser);
+
+        if (authUser != null && authUser.getClass().getName().contains("Hospital")){
+            model.addAttribute("isHospitalLogged",true);
+        }else {
+            model.addAttribute("isHospitalLogged",false);
+        }
+        return "phone-verify";
+    }
+
+    @PostMapping ("/verify-phone")
+    public String verifyPhone(Model model, @RequestParam("code")String code,
+                              RedirectAttributes redirectAttributes){
+        User authUser = (User) userService.findLoggedInUsername();
+        model.addAttribute("user", authUser);
+        model.addAttribute("authUser",authUser);
+
+        if (!userService.verifyPhone(authUser,code)){
+            redirectAttributes.addFlashAttribute("verificationFailure",true);
+            return "redirect:/phone-verify";
+        }
+
+        if (authUser != null && authUser.getClass().getName().contains("Hospital")){
+            model.addAttribute("isHospitalLogged",true);
+        }else {
+            model.addAttribute("isHospitalLogged",false);
+        }
+        model.addAttribute("verificationSuccessful",true);
+        return "phone-verify";
+    }
 }

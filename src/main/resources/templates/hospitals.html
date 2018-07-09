@@ -54,12 +54,12 @@
                     <div class="col-md-12">
                         <div class="list-container row element-top-50 element-bottom-50 os-animation"
                              data-os-animation="fadeIn" data-os-animation-delay="0.1s">
-                            <form class="form-inline" id="hospitalSearchForm" action="">
+                            <form class="form-inline" id="hospitalSearchForm" th:action="@{/search-hospitals}">
                                 <div class="form-group col-xs-4">
-                                    <input type="text" placeholder="Type in diagnosis" id="diagnosis" class="form-control">
+                                    <input type="text" placeholder="Type in diagnosis" name="diagnosis" id="diagnosis" class="form-control">
                                 </div>
                                 <div class="form-group col-xs-3">
-                                    <select>
+                                    <select name="country">
                                         <option value="Albania">Albania</option>
                                         <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
                                         <option value="Croatia">Croatia</option>
@@ -69,7 +69,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-xs-3">
-                                    <input type="text" id="hospitalCity" onfocus="initAutocomplete()" placeholder="City" class="form-control">
+                                    <input type="text" name="city" id="hospitalCity" onfocus="initAutocomplete()" placeholder="City" class="form-control">
                                 </div>
                                 <button type="submit" class="btn btn-success btn-lg">Submit</button>
                             </form>

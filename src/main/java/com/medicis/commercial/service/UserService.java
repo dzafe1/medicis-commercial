@@ -103,12 +103,12 @@ public class UserService{
            if (!user.getPhoneNumber().isEmpty() && !user.getVerifiedPhoneNumber() && !user.getPhoneNumber().equals(authUser.getPhoneNumber())) {
                Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
                String randomString = randomAlphaNumeric(4);
-               Message message = Message.creator(
+            /*   Message message = Message.creator(
                        new PhoneNumber(user.getPhoneNumber()),
                        new PhoneNumber("+14159681251"),
                        "Please verify your phone number. " +
                                "Enter this code: " + randomString
-               ).create();
+               ).create();*/
                authUser.setPhoneNumber(user.getPhoneNumber());
                authUser.setPhoneToken(randomString);
            }
@@ -147,4 +147,12 @@ public class UserService{
         return builder.toString();
     }
 
+    public Boolean verifyPhone(User authUser, String code) {
+        if (authUser.getPhoneToken().equals(code)){
+            authUser.setVerifiedPhoneNumber(true);
+            userRepository.saveAndFlush(authUser);
+            return true;
+        }
+        return false;
+    }
 }

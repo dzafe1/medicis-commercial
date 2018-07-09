@@ -21,7 +21,6 @@
                     <ul class="nav navbar-nav" id="menu-home">
                         <li id="home" class="active "> <a th:href="@{/}">Home</a> </li>
                         <li id="hospitals"  class=" "> <a th:href="@{/hospitals}">Hospitals</a> </li>
-                        <li class=" "> <a th:href="@{/about}">About Us</a> </li>
                         <li id="contact" class=" "> <a th:href="@{/contact}">Contact</a> </li>
                         <li id="login_register" th:if="${authUser == null}" class=" "> <a th:href="@{/login-register}"><i class="fa fa-user"></i></a> </li>
                         <th:block th:if="${authUser != null}">

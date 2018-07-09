@@ -115,6 +115,16 @@ public class User implements Serializable {
         this.role=role;
         this.phoneNumber="Phone number";
     }
+    public User(String fName, String lName, String email, String password, String imgPath, boolean active, String role) {
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
+        this.password = password;
+        this.imgPath = imgPath;
+        this.active = active;
+        this.role = role;
+        this.gender = "M";
+    }
 
     public User(String fName, String lName, String gender, String email, String password, String role){
         this.fName = fName;

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -84,12 +85,24 @@ public class HospitalService {
                 && bCryptPasswordEncoder.matches(currentPassword,authHospital.getPassword())){
             authHospital.setPassword(bCryptPasswordEncoder.encode(newPassword));
         }else{
-            System.out.println("drugi false");
             return false;
         }
         return true;
     }
     private void changeHospitalPrincipalPassword(String password){
         Principal principal=(Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    public List<Hospital> searchHospitals(String country, String city, String diagnosis) {
+        if (!country.isEmpty() && city.isEmpty() && diagnosis.isEmpty()){
+            return hospitalRepository.getAllByCountry(country);
+        }
+        if (!city.isEmpty() && country.isEmpty() && diagnosis.isEmpty()){
+            return hospitalRepository.getAllByCity(city);
+        }
+        if (!city.isEmpty() && !country.isEmpty()){
+            return hospitalRepository.getAllByCityAndCountry(city,country);
+        }
+        else return Collections.emptyList();
     }
 }
